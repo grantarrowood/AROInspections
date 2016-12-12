@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		9C050A2F1DFF5C8E000D0726 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A2E1DFF5C8E000D0726 /* main.m */; };
 		9C050A321DFF5C8E000D0726 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A311DFF5C8E000D0726 /* AppDelegate.m */; };
-		9C050A351DFF5C8E000D0726 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A341DFF5C8E000D0726 /* ViewController.m */; };
 		9C050A381DFF5C8E000D0726 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C050A361DFF5C8E000D0726 /* Main.storyboard */; };
 		9C050A3A1DFF5C8E000D0726 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C050A391DFF5C8E000D0726 /* Assets.xcassets */; };
 		9C050A3D1DFF5C8E000D0726 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C050A3B1DFF5C8E000D0726 /* LaunchScreen.storyboard */; };
 		9C050A481DFF5C8E000D0726 /* ARO_InspectionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A471DFF5C8E000D0726 /* ARO_InspectionsTests.m */; };
 		9C050A531DFF5C8E000D0726 /* ARO_InspectionsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A521DFF5C8E000D0726 /* ARO_InspectionsUITests.m */; };
+		9C050A621DFF64AA000D0726 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A611DFF64AA000D0726 /* MainTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +39,6 @@
 		9C050A2E1DFF5C8E000D0726 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9C050A301DFF5C8E000D0726 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9C050A311DFF5C8E000D0726 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		9C050A331DFF5C8E000D0726 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		9C050A341DFF5C8E000D0726 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9C050A371DFF5C8E000D0726 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9C050A391DFF5C8E000D0726 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C050A3C1DFF5C8E000D0726 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +49,8 @@
 		9C050A4E1DFF5C8E000D0726 /* ARO InspectionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ARO InspectionsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C050A521DFF5C8E000D0726 /* ARO_InspectionsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARO_InspectionsUITests.m; sourceTree = "<group>"; };
 		9C050A541DFF5C8E000D0726 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C050A601DFF64AA000D0726 /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
+		9C050A611DFF64AA000D0726 /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +103,8 @@
 			children = (
 				9C050A301DFF5C8E000D0726 /* AppDelegate.h */,
 				9C050A311DFF5C8E000D0726 /* AppDelegate.m */,
-				9C050A331DFF5C8E000D0726 /* ViewController.h */,
-				9C050A341DFF5C8E000D0726 /* ViewController.m */,
+				9C050A601DFF64AA000D0726 /* MainTableViewController.h */,
+				9C050A611DFF64AA000D0726 /* MainTableViewController.m */,
 				9C050A361DFF5C8E000D0726 /* Main.storyboard */,
 				9C050A391DFF5C8E000D0726 /* Assets.xcassets */,
 				9C050A3B1DFF5C8E000D0726 /* LaunchScreen.storyboard */,
@@ -276,7 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C050A351DFF5C8E000D0726 /* ViewController.m in Sources */,
+				9C050A621DFF64AA000D0726 /* MainTableViewController.m in Sources */,
 				9C050A321DFF5C8E000D0726 /* AppDelegate.m in Sources */,
 				9C050A2F1DFF5C8E000D0726 /* main.m in Sources */,
 			);
@@ -516,6 +516,7 @@
 				9C050A591DFF5C8E000D0726 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9C050A5A1DFF5C8E000D0726 /* Build configuration list for PBXNativeTarget "ARO InspectionsTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +525,7 @@
 				9C050A5C1DFF5C8E000D0726 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9C050A5D1DFF5C8E000D0726 /* Build configuration list for PBXNativeTarget "ARO InspectionsUITests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +534,7 @@
 				9C050A5F1DFF5C8E000D0726 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
