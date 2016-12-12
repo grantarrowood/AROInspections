@@ -16,6 +16,7 @@
 		9C050A531DFF5C8E000D0726 /* ARO_InspectionsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A521DFF5C8E000D0726 /* ARO_InspectionsUITests.m */; };
 		9C050A621DFF64AA000D0726 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A611DFF64AA000D0726 /* MainTableViewController.m */; };
 		9C050A651DFF66ED000D0726 /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A641DFF66ED000D0726 /* MainTableViewCell.m */; };
+		9C050A681DFF6B54000D0726 /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A671DFF6B54000D0726 /* NavigationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		9C050A611DFF64AA000D0726 /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
 		9C050A631DFF66ED000D0726 /* MainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewCell.h; sourceTree = "<group>"; };
 		9C050A641DFF66ED000D0726 /* MainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewCell.m; sourceTree = "<group>"; };
+		9C050A661DFF6B54000D0726 /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
+		9C050A671DFF6B54000D0726 /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,8 @@
 				9C050A611DFF64AA000D0726 /* MainTableViewController.m */,
 				9C050A631DFF66ED000D0726 /* MainTableViewCell.h */,
 				9C050A641DFF66ED000D0726 /* MainTableViewCell.m */,
+				9C050A661DFF6B54000D0726 /* NavigationViewController.h */,
+				9C050A671DFF6B54000D0726 /* NavigationViewController.m */,
 				9C050A361DFF5C8E000D0726 /* Main.storyboard */,
 				9C050A391DFF5C8E000D0726 /* Assets.xcassets */,
 				9C050A3B1DFF5C8E000D0726 /* LaunchScreen.storyboard */,
@@ -283,6 +288,7 @@
 			files = (
 				9C050A621DFF64AA000D0726 /* MainTableViewController.m in Sources */,
 				9C050A321DFF5C8E000D0726 /* AppDelegate.m in Sources */,
+				9C050A681DFF6B54000D0726 /* NavigationViewController.m in Sources */,
 				9C050A651DFF66ED000D0726 /* MainTableViewCell.m in Sources */,
 				9C050A2F1DFF5C8E000D0726 /* main.m in Sources */,
 			);
