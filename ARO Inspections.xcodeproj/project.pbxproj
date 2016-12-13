@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		331C2085170CAD3B2D5E90E5 /* libPods-ARO InspectionsUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2EF6960A31479AFBBFEE20 /* libPods-ARO InspectionsUITests.a */; };
+		859201942E9EE4045ED7CD37 /* libPods-ARO InspectionsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD367D3B2F99971F5AD3DBA4 /* libPods-ARO InspectionsTests.a */; };
+		93AC2DEABBAC726C9C0AC154 /* libPods-ARO Inspections.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3F022CE09124318FF8325C /* libPods-ARO Inspections.a */; };
 		9C050A2F1DFF5C8E000D0726 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A2E1DFF5C8E000D0726 /* main.m */; };
 		9C050A321DFF5C8E000D0726 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A311DFF5C8E000D0726 /* AppDelegate.m */; };
 		9C050A381DFF5C8E000D0726 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C050A361DFF5C8E000D0726 /* Main.storyboard */; };
@@ -37,6 +40,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09E1AFF180D4E1175AA7DE33 /* Pods-ARO InspectionsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARO InspectionsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARO InspectionsUITests/Pods-ARO InspectionsUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		22A59D11C4D076E4DF4D1929 /* Pods-ARO InspectionsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARO InspectionsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARO InspectionsUITests/Pods-ARO InspectionsUITests.release.xcconfig"; sourceTree = "<group>"; };
+		342D546269C08ED04660D4F3 /* Pods-ARO InspectionsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARO InspectionsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARO InspectionsTests/Pods-ARO InspectionsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3C2EF6960A31479AFBBFEE20 /* libPods-ARO InspectionsUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ARO InspectionsUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CB7FC71106A7A28F10B3E95 /* Pods-ARO Inspections.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARO Inspections.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARO Inspections/Pods-ARO Inspections.release.xcconfig"; sourceTree = "<group>"; };
+		7D3F022CE09124318FF8325C /* libPods-ARO Inspections.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ARO Inspections.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C050A2A1DFF5C8E000D0726 /* ARO Inspections.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ARO Inspections.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C050A2E1DFF5C8E000D0726 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9C050A301DFF5C8E000D0726 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -57,6 +66,9 @@
 		9C050A641DFF66ED000D0726 /* MainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewCell.m; sourceTree = "<group>"; };
 		9C050A661DFF6B54000D0726 /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		9C050A671DFF6B54000D0726 /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
+		BD367D3B2F99971F5AD3DBA4 /* libPods-ARO InspectionsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ARO InspectionsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F547460ACA6FA2E2967C6CFA /* Pods-ARO Inspections.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARO Inspections.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARO Inspections/Pods-ARO Inspections.debug.xcconfig"; sourceTree = "<group>"; };
+		FABA8983A68BBD6A3CBE70F9 /* Pods-ARO InspectionsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARO InspectionsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARO InspectionsTests/Pods-ARO InspectionsTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93AC2DEABBAC726C9C0AC154 /* libPods-ARO Inspections.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				859201942E9EE4045ED7CD37 /* libPods-ARO InspectionsTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,12 +92,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				331C2085170CAD3B2D5E90E5 /* libPods-ARO InspectionsUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C518AB37A4F041B7F94C958 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7D3F022CE09124318FF8325C /* libPods-ARO Inspections.a */,
+				BD367D3B2F99971F5AD3DBA4 /* libPods-ARO InspectionsTests.a */,
+				3C2EF6960A31479AFBBFEE20 /* libPods-ARO InspectionsUITests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9C050A211DFF5C8E000D0726 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +116,8 @@
 				9C050A461DFF5C8E000D0726 /* ARO InspectionsTests */,
 				9C050A511DFF5C8E000D0726 /* ARO InspectionsUITests */,
 				9C050A2B1DFF5C8E000D0726 /* Products */,
+				9ECC5518E11BACA6FF486700 /* Pods */,
+				5C518AB37A4F041B7F94C958 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -150,6 +177,19 @@
 			path = "ARO InspectionsUITests";
 			sourceTree = "<group>";
 		};
+		9ECC5518E11BACA6FF486700 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F547460ACA6FA2E2967C6CFA /* Pods-ARO Inspections.debug.xcconfig */,
+				4CB7FC71106A7A28F10B3E95 /* Pods-ARO Inspections.release.xcconfig */,
+				342D546269C08ED04660D4F3 /* Pods-ARO InspectionsTests.debug.xcconfig */,
+				FABA8983A68BBD6A3CBE70F9 /* Pods-ARO InspectionsTests.release.xcconfig */,
+				09E1AFF180D4E1175AA7DE33 /* Pods-ARO InspectionsUITests.debug.xcconfig */,
+				22A59D11C4D076E4DF4D1929 /* Pods-ARO InspectionsUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -157,9 +197,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9C050A571DFF5C8E000D0726 /* Build configuration list for PBXNativeTarget "ARO Inspections" */;
 			buildPhases = (
+				401EFCCB1528185468D203E1 /* [CP] Check Pods Manifest.lock */,
 				9C050A261DFF5C8E000D0726 /* Sources */,
 				9C050A271DFF5C8E000D0726 /* Frameworks */,
 				9C050A281DFF5C8E000D0726 /* Resources */,
+				1C2040EFA08E8B80794765CD /* [CP] Embed Pods Frameworks */,
+				8405338497280C958209E244 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -174,9 +217,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9C050A5A1DFF5C8E000D0726 /* Build configuration list for PBXNativeTarget "ARO InspectionsTests" */;
 			buildPhases = (
+				346D2AF16CD9F6EE64252939 /* [CP] Check Pods Manifest.lock */,
 				9C050A3F1DFF5C8E000D0726 /* Sources */,
 				9C050A401DFF5C8E000D0726 /* Frameworks */,
 				9C050A411DFF5C8E000D0726 /* Resources */,
+				82077DB254B6CF79DBFF9F13 /* [CP] Embed Pods Frameworks */,
+				23ADFDDB9B9598BF8D34F160 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -192,9 +238,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9C050A5D1DFF5C8E000D0726 /* Build configuration list for PBXNativeTarget "ARO InspectionsUITests" */;
 			buildPhases = (
+				B265E11BDD1883FB0FD288FF /* [CP] Check Pods Manifest.lock */,
 				9C050A4A1DFF5C8E000D0726 /* Sources */,
 				9C050A4B1DFF5C8E000D0726 /* Frameworks */,
 				9C050A4C1DFF5C8E000D0726 /* Resources */,
+				40C35C62D34AFEA324D142EB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -280,6 +328,129 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1C2040EFA08E8B80794765CD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARO Inspections/Pods-ARO Inspections-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		23ADFDDB9B9598BF8D34F160 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARO InspectionsTests/Pods-ARO InspectionsTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		346D2AF16CD9F6EE64252939 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		401EFCCB1528185468D203E1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		40C35C62D34AFEA324D142EB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARO InspectionsUITests/Pods-ARO InspectionsUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		82077DB254B6CF79DBFF9F13 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARO InspectionsTests/Pods-ARO InspectionsTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8405338497280C958209E244 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARO Inspections/Pods-ARO Inspections-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B265E11BDD1883FB0FD288FF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9C050A261DFF5C8E000D0726 /* Sources */ = {
@@ -437,6 +608,7 @@
 		};
 		9C050A581DFF5C8E000D0726 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F547460ACA6FA2E2967C6CFA /* Pods-ARO Inspections.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4VLU4CB777;
@@ -449,6 +621,7 @@
 		};
 		9C050A591DFF5C8E000D0726 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CB7FC71106A7A28F10B3E95 /* Pods-ARO Inspections.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4VLU4CB777;
@@ -461,6 +634,7 @@
 		};
 		9C050A5B1DFF5C8E000D0726 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 342D546269C08ED04660D4F3 /* Pods-ARO InspectionsTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 4VLU4CB777;
@@ -474,6 +648,7 @@
 		};
 		9C050A5C1DFF5C8E000D0726 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FABA8983A68BBD6A3CBE70F9 /* Pods-ARO InspectionsTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 4VLU4CB777;
@@ -487,6 +662,7 @@
 		};
 		9C050A5E1DFF5C8E000D0726 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09E1AFF180D4E1175AA7DE33 /* Pods-ARO InspectionsUITests.debug.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 4VLU4CB777;
 				INFOPLIST_FILE = "ARO InspectionsUITests/Info.plist";
@@ -499,6 +675,7 @@
 		};
 		9C050A5F1DFF5C8E000D0726 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22A59D11C4D076E4DF4D1929 /* Pods-ARO InspectionsUITests.release.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 4VLU4CB777;
 				INFOPLIST_FILE = "ARO InspectionsUITests/Info.plist";

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>GTMOAuth2.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GTMSessionFetcher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GoogleAPIClientForREST.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ObjectiveDropboxOfficial.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ARO Inspections.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ARO InspectionsTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ARO InspectionsUITests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>2D8CCDAF9755E2CE87236FC6D71901A6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3EC508E2AD93A8B7862551E8450FF1A8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>409482D7023A3C8E0DE14416BD0F4702</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C848428A6401B62792C564ACD2380497</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D1035F868929B04DD0A96D8E1B65EB8E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F032CAE3F6717961B6E167B00E44096C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F91A7A294894B2457C6321456597C59F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

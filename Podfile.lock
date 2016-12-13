@@ -1,0 +1,29 @@
+PODS:
+  - GoogleAPIClientForREST/Core (1.0.3):
+    - GTMSessionFetcher (>= 1.1.3, ~> 1.1)
+  - GoogleAPIClientForREST/Sheets (1.0.3):
+    - GoogleAPIClientForREST/Core
+    - GTMSessionFetcher (>= 1.1.3, ~> 1.1)
+  - GTMOAuth2 (1.1.4):
+    - GTMSessionFetcher (~> 1.1)
+  - GTMSessionFetcher (1.1.7):
+    - GTMSessionFetcher/Full (= 1.1.7)
+  - GTMSessionFetcher/Core (1.1.7)
+  - GTMSessionFetcher/Full (1.1.7):
+    - GTMSessionFetcher/Core (= 1.1.7)
+  - ObjectiveDropboxOfficial (1.1.1)
+
+DEPENDENCIES:
+  - GoogleAPIClientForREST/Sheets (~> 1.0.3)
+  - GTMOAuth2 (~> 1.1.2)
+  - ObjectiveDropboxOfficial
+
+SPEC CHECKSUMS:
+  GoogleAPIClientForREST: 0b72399da5a108ba42a7fe0f8559edd7c49ea96a
+  GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
+  GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
+  ObjectiveDropboxOfficial: b379df3d7efd5f3c3d0fe6d6809af089772f5dfd
+
+PODFILE CHECKSUM: 7b91be5e53f5ebf7c1c84b99526f693db86f1c7a
+
+COCOAPODS: 1.0.1
