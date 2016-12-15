@@ -17,11 +17,16 @@
     NSString *file[100];
     int rowcountcheck;
     int rowcountvisits;
+    NSString *visitsRemaining;
+    int first;
+    int sections;
+    NSString *sectionTitle;
 }
 
 
 @property (nonatomic, strong) GTLRSheetsService *service;
 @property (strong, nonatomic) NSMutableArray *objects;
+@property (strong, nonatomic) NSMutableArray *clients;
 @property (strong, nonatomic) NSMutableArray *done;
 @property (strong, nonatomic) NSMutableArray *notdone;
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;

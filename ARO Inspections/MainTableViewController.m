@@ -16,7 +16,7 @@
 @implementation MainTableViewController
 
 static NSString *const kKeychainItemName = @"Google Sheets API";
-static NSString *const kClientID = @"986274447553-tucq0mb3v3nijbqrphka57590ecompgv.apps.googleusercontent.com";
+static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqslk.apps.googleusercontent.com";
 
 
 - (void)viewDidLoad {
@@ -30,8 +30,12 @@ static NSString *const kClientID = @"986274447553-tucq0mb3v3nijbqrphka57590ecomp
 }
 
 -(void)viewDidAppear:(BOOL)animated {
+    sectionTitle = @"";
     _objects = [[NSMutableArray alloc] init];
+    _clients = [[NSMutableArray alloc] init];
+    sections = 1;
     rowcountcheck = 1;
+    first = 0;
     rowcountvisits = 1;
     if (!self.service.authorizer.canAuthorize) {
         // Not yet authorized, request authorization by pushing the login UI onto the UI stack.
@@ -81,22 +85,49 @@ static NSString *const kClientID = @"986274447553-tucq0mb3v3nijbqrphka57590ecomp
         NSArray *rows = result.values;
         if (rows.count > 0) {
             //[output appendString:@"Name, Major:\n"];
+            int prevYear = 0;
+            int prevMonth = 0;
             for (NSArray *row in rows) {
-                // Print columns A and E, which correspond to indices 0 and 4.
-                //[output appendFormat:@"%@, %@\n, %@\n", row[0], row[4], row[6]];
-                for (int i = 0; i<rowcountcheck; i++) {
-                    if (check[i-1][0] == row[3]) {
-                        int visitnum = check[i-1][1].intValue - 1;
-                        check[i-1][1] = [NSString stringWithFormat:@"%d", visitnum];
-                        if (visitnum == 0) {
-                            //file[_objects.count] = row[6];
-                            [_objects addObject:row[3]];
-                            [_mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationAutomatic];
-                        }
+                NSString *thisYear = [row[1] substringToIndex:4];
+                if(prevYear < thisYear.intValue) {
+                    sections += 1;
+                    sectionTitle = [NSString stringWithFormat:@"%@%@",[row[1] substringToIndex:10], sectionTitle];
+                    [self.mainTableView insertSections:[NSIndexSet indexSetWithIndex:sections-1]
+                                 withRowAnimation:UITableViewRowAnimationTop];
+                    prevYear = thisYear.intValue;
+                } else {
+                    NSString *thisMonth = [row[1] substringWithRange:NSMakeRange(5, 2)];;
+                    if(prevMonth < thisMonth.intValue) {
+                        sections += 1;
+                        sectionTitle = [NSString stringWithFormat:@"%@%@",[row[1] substringToIndex:10], sectionTitle];
+                        [self.mainTableView insertSections:[NSIndexSet indexSetWithIndex:sections-1]
+                                          withRowAnimation:UITableViewRowAnimationTop];
+                        prevMonth = thisMonth.intValue;
                     }
                 }
-                //[_nameTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationAutomatic];
             }
+//            for (NSArray *row in rows) {
+//                // Print columns A and E, which correspond to indices 0 and 4.
+//                //[output appendFormat:@"%@, %@\n, %@\n", row[0], row[4], row[6]];
+//
+//                first = 0;
+//                for (int i = 0; i<rowcountcheck; i++) {
+//                    if ([check[i][0] isEqualToString: row[3]]) {
+//                        int visitnum = check[i][1].intValue - 1;
+//                        check[i][1] = [NSString stringWithFormat:@"%d", visitnum];
+//                        //                        if (first == 0) {
+//                        //                            //file[_objects.count] = row[6];
+//                        //                            [_objects addObject:row[3]];
+//                        //                            visitsRemaining = [NSString stringWithFormat:@"%d visits remaining", visitnum];
+//                        //                            [_mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationAutomatic];
+//                        //                        } else {
+//                        //                            visitsRemaining = [NSString stringWithFormat:@"%d visits remaining", visitnum];
+//                        //                            [_mainTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+//                        //                        }
+//                    }
+//                }
+//                //[_nameTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationAutomatic];
+//            }
         } else {
             //[output appendString:@"No data found."];
         }
@@ -118,17 +149,14 @@ static NSString *const kClientID = @"986274447553-tucq0mb3v3nijbqrphka57590ecomp
             for (NSArray *row in rows) {
                 // Print columns A and E, which correspond to indices 0 and 4.
                 //[output appendFormat:@"%@, %@\n, %@\n", row[0], row[4], row[6]];
-                
                 check[rowcountcheck-1][0] = row[0];
                 check[rowcountcheck-1][1] = row[3];
                 rowcountcheck += 1;
-                //[_nameTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationAutomatic];
+                [_clients addObject:row[0]];
+                [_mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_clients.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationAutomatic];
             }
-            //            for (int i = 0; i<rowcount; i++) {
-            //                if (check[rowcount-1][0]) {
-            //
-            //                }
-            //            }
+            
+            NSLog(@"Hello World");
         } else {
             //[output appendString:@"No data found."];
         }
@@ -196,23 +224,30 @@ static NSString *const kClientID = @"986274447553-tucq0mb3v3nijbqrphka57590ecomp
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return sections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_objects count];
+    return [_clients count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MainTableViewCell *cell = [self.mainTableView dequeueReusableCellWithIdentifier:@"mainCell" forIndexPath:indexPath];
-    cell.clientNameLabel.text = _objects[indexPath.row];
+    cell.clientNameLabel.text = _clients[indexPath.row];
     cell.remainingVisitsLabel.text = @"5 Visits Remaining";
-    // Configure the cell...
+    first = 1;
     
     return cell;
 }
-
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if (sectionTitle.length >section*10) {
+        NSString *secTitle = [sectionTitle substringWithRange:NSMakeRange(section*10, 10)];
+        return secTitle;
+        
+    }
+    return @"";
+}
 
 /*
 // Override to support conditional editing of the table view.
