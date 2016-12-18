@@ -47,13 +47,13 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
                                                               clientID:kClientID
                                                           clientSecret:nil];
     } else {
-        [self listMajors];
+        [self getSections];
     }
     
 }
 
 
-- (void)listMajors {
+- (void)getSections {
     NSString *spreadsheet2Id = @"1CUaJ5V3qxoSoCulGTjyxh6r7hcT3WsM6R0R3fX1vQp8";
     NSString *range2 = @"Clients!A2:D";
     
@@ -94,6 +94,12 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
                     sectionTitle = [NSString stringWithFormat:@"%@%@",[row[1] substringToIndex:10], sectionTitle];
                     [self.mainTableView insertSections:[NSIndexSet indexSetWithIndex:sections-1]
                                  withRowAnimation:UITableViewRowAnimationTop];
+                    for (int i =0; i>rowcountcheck; i++) {
+                        if (_clients[i] == row[0]) {
+                            clientCount[i][1] += 1;
+                            clientCount[rowcountcheck-1][2] = sections-1;
+                        }
+                    }
                     prevYear = thisYear.intValue;
                 } else {
                     NSString *thisMonth = [row[1] substringWithRange:NSMakeRange(5, 2)];;
@@ -102,10 +108,25 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
                         sectionTitle = [NSString stringWithFormat:@"%@%@",[row[1] substringToIndex:10], sectionTitle];
                         [self.mainTableView insertSections:[NSIndexSet indexSetWithIndex:sections-1]
                                           withRowAnimation:UITableViewRowAnimationTop];
+                        for (int i =0; i>rowcountcheck; i++) {
+                            if (_clients[i] == row[0]) {
+                                clientCount[i][1] += 1;
+                                clientCount[rowcountcheck-1][2] = sections-1;
+                            }
+                        }
                         prevMonth = thisMonth.intValue;
                     }
                 }
             }
+            for (int i =0; i>sections; i++) {
+                for (int j = 0; i>rowcountcheck; i++) {
+                    visitsRemaining = [NSString stringWithFormat:@"%d visits this month", clientCount[j][1]];
+                    [_mainTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:j inSection:i]] withRowAnimation:UITableViewRowAnimationNone];
+                }
+            }
+            
+            
+            
 //            for (NSArray *row in rows) {
 //                // Print columns A and E, which correspond to indices 0 and 4.
 //                //[output appendFormat:@"%@, %@\n, %@\n", row[0], row[4], row[6]];
@@ -115,6 +136,7 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
 //                    if ([check[i][0] isEqualToString: row[3]]) {
 //                        int visitnum = check[i][1].intValue - 1;
 //                        check[i][1] = [NSString stringWithFormat:@"%d", visitnum];
+//                        
 //                        //                        if (first == 0) {
 //                        //                            //file[_objects.count] = row[6];
 //                        //                            [_objects addObject:row[3]];
@@ -126,8 +148,8 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
 //                        //                        }
 //                    }
 //                }
-//                //[_nameTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationAutomatic];
-//            }
+                //[_nameTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationAutomatic];
+           // }
         } else {
             //[output appendString:@"No data found."];
         }
@@ -151,6 +173,7 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
                 //[output appendFormat:@"%@, %@\n, %@\n", row[0], row[4], row[6]];
                 check[rowcountcheck-1][0] = row[0];
                 check[rowcountcheck-1][1] = row[3];
+                clientCount[rowcountcheck-1][0] = rowcountcheck-1;
                 rowcountcheck += 1;
                 [_clients addObject:row[0]];
                 [_mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_clients.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationAutomatic];
@@ -235,7 +258,7 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MainTableViewCell *cell = [self.mainTableView dequeueReusableCellWithIdentifier:@"mainCell" forIndexPath:indexPath];
     cell.clientNameLabel.text = _clients[indexPath.row];
-    cell.remainingVisitsLabel.text = @"5 Visits Remaining";
+    cell.remainingVisitsLabel.text = @"0 Visits This Month";
     first = 1;
     
     return cell;

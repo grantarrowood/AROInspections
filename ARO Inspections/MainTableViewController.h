@@ -21,6 +21,7 @@
     int first;
     int sections;
     NSString *sectionTitle;
+    int clientCount[100][3];
 }
 
 
