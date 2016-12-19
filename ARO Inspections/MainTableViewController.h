@@ -28,6 +28,7 @@
 @property (nonatomic, strong) GTLRSheetsService *service;
 @property (strong, nonatomic) NSMutableArray *objects;
 @property (strong, nonatomic) NSMutableArray *clients;
+@property (strong, nonatomic) NSMutableArray *clientSection;
 @property (strong, nonatomic) NSMutableArray *done;
 @property (strong, nonatomic) NSMutableArray *notdone;
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
