@@ -21,7 +21,7 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AROLOGO"]];
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PikeLogo"]];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -120,6 +120,7 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
             }
             for (int i =0; i>sections; i++) {
                 for (int j = 0; i>rowcountcheck; i++) {
+                    
                     visitsRemaining = [NSString stringWithFormat:@"%d visits this month", clientCount[j][1]];
                     [_mainTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:j inSection:i]] withRowAnimation:UITableViewRowAnimationNone];
                 }
@@ -266,7 +267,17 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if (sectionTitle.length >section*10) {
         NSString *secTitle = [sectionTitle substringWithRange:NSMakeRange(section*10, 10)];
-        return secTitle;
+        
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    // ignore +11 and use timezone name instead of seconds from gmt
+    [dateFormat setDateFormat:@"YYYY-MM-dd"];
+    [dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
+    NSDate *dte = [dateFormat dateFromString:secTitle];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMMM, YYYY"];
+    NSString *result = [formatter stringFromDate:dte];
+        return result;
         
     }
     return @"";
