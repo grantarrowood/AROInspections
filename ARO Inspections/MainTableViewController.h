@@ -22,13 +22,17 @@
     int sections;
     NSString *sectionTitle;
     int clientCount[100][3];
+    NSString *sectionNum[100][2];
 }
 
 
 @property (nonatomic, strong) GTLRSheetsService *service;
-@property (strong, nonatomic) NSMutableArray *objects;
+//@property (strong, nonatomic) NSMutableArray *objects;
 @property (strong, nonatomic) NSMutableArray *clients;
-@property (strong, nonatomic) NSMutableArray *clientSection;
+@property (strong, nonatomic) NSMutableArray *inspections;
+@property (strong, nonatomic) NSMutableArray *months;
+
+//@property (strong, nonatomic) NSMutableArray *clientSection;
 @property (strong, nonatomic) NSMutableArray *done;
 @property (strong, nonatomic) NSMutableArray *notdone;
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
