@@ -27,11 +27,11 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-    //sectionTitle = @"";
     _clients = [[NSMutableArray alloc] init];
     _months = [[NSMutableArray alloc] init];
     _inspections = [[NSMutableArray alloc] init];
-    
+    _panelInspections = [[NSMutableArray alloc] init];
+
     
     if (!self.service.authorizer.canAuthorize) {
         // Not yet authorized, request authorization by pushing the login UI onto the UI stack.
@@ -208,20 +208,49 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return _months.count;
+    if (tableView == self.mainTableView) {
+        return _months.count;
+    }
+    if (tableView == self.panelTableView) {
+        return 1;
+    }
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_clients count];
+    if (tableView == self.mainTableView) {
+        return _clients.count;
+    }
+    if (tableView == self.panelTableView) {
+        return _panelInspections.count;
+    }
+    return 0;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MainTableViewCell *cell = [self.mainTableView dequeueReusableCellWithIdentifier:@"mainCell" forIndexPath:indexPath];
-    cell.clientNameLabel.text = [[_clients objectAtIndex:indexPath.row] valueForKey:@"Name"];
-    cell.remainingVisitsLabel.text = [NSString stringWithFormat:@"%d out of %@", [self getVisits:[[_clients objectAtIndex:indexPath.row] valueForKey:@"Name"] inSection:indexPath.section], [[_clients objectAtIndex:indexPath.row] valueForKey:@"Visits"]];
     
-    return cell;
+    if (tableView == self.mainTableView) {
+        MainTableViewCell *cell = [self.mainTableView dequeueReusableCellWithIdentifier:@"mainCell" forIndexPath:indexPath];
+        cell.clientNameLabel.text = [[_clients objectAtIndex:indexPath.row] valueForKey:@"Name"];
+        cell.remainingVisitsLabel.text = [NSString stringWithFormat:@"%d out of %@", [self getVisits:[[_clients objectAtIndex:indexPath.row] valueForKey:@"Name"] inSection:indexPath.section], [[_clients objectAtIndex:indexPath.row] valueForKey:@"Visits"]];
+        return cell;
+    }
+    if (tableView == self.panelTableView) {
+        MainPanelTableViewCell *cell = [self.panelTableView dequeueReusableCellWithIdentifier:@"panelCell" forIndexPath:indexPath];
+        cell.jobLocationLabel.text = [[_panelInspections objectAtIndex:indexPath.row] valueForKey:@"Location"];
+        cell.dateLabel.text = [[_panelInspections objectAtIndex:indexPath.row] valueForKey:@"Date"];
+        cell.inspectorsNameLabel.text = [[_panelInspections objectAtIndex:indexPath.row] valueForKey:@"InspectionID"];
+        return cell;
+    }
+    
+    
+    
+    
+    return UITableViewCellStyleDefault;
+
+    
+    
 }
 
 
@@ -247,7 +276,9 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    
+    if (tableView == _mainTableView) {
+        return _months[section];
+    }
     //    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     //    // ignore +11 and use timezone name instead of seconds from gmt
     //    [dateFormat setDateFormat:@"YYYY-MM"];
@@ -257,9 +288,41 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     //    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     //    [formatter setDateFormat:@"MMMM, YYYY"];
     //    NSString *result = [formatter stringFromDate:dte];
-    //
-    return _months[section];
+    return @"";
+
 }
+
+
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    if(tableView == self.mainTableView) {
+        NSString *sectionDate = _months[indexPath.section];
+        for(int i = 0; i < _inspections.count;i++) {
+            if ([[[_inspections objectAtIndex:i] valueForKey:@"ClientName"] isEqualToString:[[_clients objectAtIndex:indexPath.row] valueForKey:@"Name"]]) {
+                NSString *inspectionsDate = [[_inspections objectAtIndex:i] valueForKey:@"Date"];
+                NSString *yearMonth;
+                if(inspectionsDate.length > 6) {
+                    yearMonth = [inspectionsDate substringToIndex:7];
+                }
+                if ([yearMonth isEqualToString:sectionDate]) {
+                    [_panelInspections addObject:@{@"Location": [[_inspections objectAtIndex:i] valueForKey:@"Location"], @"Date": [[_inspections objectAtIndex:i] valueForKey:@"Date"], @"InspectorName": [[_inspections objectAtIndex:i] valueForKey:@"InspectorName"], @"InspectionID": [[_inspections objectAtIndex:i] valueForKey:@"InspectionID"]}];
+                }
+            }
+        }
+        [_panelTableView reloadData];
+        self.mainTableView.transform = CGAffineTransformMakeTranslation(-50, 0);
+        self.panelTableView.transform = CGAffineTransformMakeTranslation(-265, 0);
+    }
+    
+    
+    
+
+}
+
+
 
 /*
  // Override to support conditional editing of the table view.

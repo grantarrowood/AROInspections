@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSMutableArray *clients;
 @property (strong, nonatomic) NSMutableArray *inspections;
 @property (strong, nonatomic) NSMutableArray *months;
+@property (strong, nonatomic) NSMutableArray *panelInspections;
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
 @property (strong, nonatomic) IBOutlet UITableView *panelTableView;
 @end
