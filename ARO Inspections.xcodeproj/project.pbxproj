@@ -20,6 +20,8 @@
 		9C050A621DFF64AA000D0726 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A611DFF64AA000D0726 /* MainTableViewController.m */; };
 		9C050A651DFF66ED000D0726 /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A641DFF66ED000D0726 /* MainTableViewCell.m */; };
 		9C050A681DFF6B54000D0726 /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A671DFF6B54000D0726 /* NavigationViewController.m */; };
+		9C0D30A21E287263003AC7DF /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C0D30A11E287263003AC7DF /* MainViewController.m */; };
+		9C0D30A51E28734D003AC7DF /* MainPanelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C0D30A41E28734D003AC7DF /* MainPanelTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,10 @@
 		9C050A641DFF66ED000D0726 /* MainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewCell.m; sourceTree = "<group>"; };
 		9C050A661DFF6B54000D0726 /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		9C050A671DFF6B54000D0726 /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
+		9C0D30A01E287263003AC7DF /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		9C0D30A11E287263003AC7DF /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		9C0D30A31E28734D003AC7DF /* MainPanelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPanelTableViewCell.h; sourceTree = "<group>"; };
+		9C0D30A41E28734D003AC7DF /* MainPanelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPanelTableViewCell.m; sourceTree = "<group>"; };
 		BD367D3B2F99971F5AD3DBA4 /* libPods-ARO InspectionsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ARO InspectionsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F547460ACA6FA2E2967C6CFA /* Pods-ARO Inspections.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARO Inspections.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARO Inspections/Pods-ARO Inspections.debug.xcconfig"; sourceTree = "<group>"; };
 		FABA8983A68BBD6A3CBE70F9 /* Pods-ARO InspectionsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARO InspectionsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARO InspectionsTests/Pods-ARO InspectionsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -138,6 +144,10 @@
 				9C050A311DFF5C8E000D0726 /* AppDelegate.m */,
 				9C050A601DFF64AA000D0726 /* MainTableViewController.h */,
 				9C050A611DFF64AA000D0726 /* MainTableViewController.m */,
+				9C0D30A31E28734D003AC7DF /* MainPanelTableViewCell.h */,
+				9C0D30A41E28734D003AC7DF /* MainPanelTableViewCell.m */,
+				9C0D30A01E287263003AC7DF /* MainViewController.h */,
+				9C0D30A11E287263003AC7DF /* MainViewController.m */,
 				9C050A631DFF66ED000D0726 /* MainTableViewCell.h */,
 				9C050A641DFF66ED000D0726 /* MainTableViewCell.m */,
 				9C050A661DFF6B54000D0726 /* NavigationViewController.h */,
@@ -458,9 +468,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C050A621DFF64AA000D0726 /* MainTableViewController.m in Sources */,
+				9C0D30A21E287263003AC7DF /* MainViewController.m in Sources */,
 				9C050A321DFF5C8E000D0726 /* AppDelegate.m in Sources */,
 				9C050A681DFF6B54000D0726 /* NavigationViewController.m in Sources */,
 				9C050A651DFF66ED000D0726 /* MainTableViewCell.m in Sources */,
+				9C0D30A51E28734D003AC7DF /* MainPanelTableViewCell.m in Sources */,
 				9C050A2F1DFF5C8E000D0726 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

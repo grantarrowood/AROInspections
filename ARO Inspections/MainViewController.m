@@ -1,32 +1,29 @@
 //
-//  MainTableViewController.m
+//  MainViewController.m
 //  ARO Inspections
 //
-//  Created by Grant Arrowood on 12/12/16.
-//  Copyright © 2016 Piglet Products. All rights reserved.
+//  Created by Grant Arrowood on 1/12/17.
+//  Copyright © 2017 Piglet Products. All rights reserved.
 //
 
-#import "MainTableViewController.h"
+#import "MainViewController.h"
 #import "MainTableViewCell.h"
+#import "MainPanelTableViewCell.h"
 
-@interface MainTableViewController ()
+
+@interface MainViewController ()
 
 @end
 
-@implementation MainTableViewController
+@implementation MainViewController
 
 static NSString *const kKeychainItemName = @"Google Sheets API";
 static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqslk.apps.googleusercontent.com";
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PikeLogo"]];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    // Do any additional setup after loading the view.
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -35,11 +32,11 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     _months = [[NSMutableArray alloc] init];
     _inspections = [[NSMutableArray alloc] init];
     
-
+    
     if (!self.service.authorizer.canAuthorize) {
         // Not yet authorized, request authorization by pushing the login UI onto the UI stack.
         [self presentViewController:[self createAuthController] animated:YES completion:nil];
-
+        
         self.service = [[GTLRSheetsService alloc] init];
         self.service.authorizer =
         [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
@@ -48,8 +45,9 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     } else {
         [self getSections];
     }
-
+    
 }
+
 
 - (void)getSections {
     NSString *spreadsheet2Id = @"1CUaJ5V3qxoSoCulGTjyxh6r7hcT3WsM6R0R3fX1vQp8";
@@ -105,7 +103,7 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
                                 }
                             }
                         }
-
+                        
                     }
                     
                     NSString *row5 = [NSString stringWithFormat:@"%@",row[5]];
@@ -116,9 +114,9 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
                             [_months addObject:yearMonth];
                         }
                     }
-
+                    
                 }
-
+                
             }
             [_mainTableView reloadData];
         } else {
@@ -222,7 +220,7 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     MainTableViewCell *cell = [self.mainTableView dequeueReusableCellWithIdentifier:@"mainCell" forIndexPath:indexPath];
     cell.clientNameLabel.text = [[_clients objectAtIndex:indexPath.row] valueForKey:@"Name"];
     cell.remainingVisitsLabel.text = [NSString stringWithFormat:@"%d out of %@", [self getVisits:[[_clients objectAtIndex:indexPath.row] valueForKey:@"Name"] inSection:indexPath.section], [[_clients objectAtIndex:indexPath.row] valueForKey:@"Visits"]];
-
+    
     return cell;
 }
 
@@ -249,62 +247,63 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-
-//    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-//    // ignore +11 and use timezone name instead of seconds from gmt
-//    [dateFormat setDateFormat:@"YYYY-MM"];
-//    //[dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
-//    NSDate *dte = [dateFormat dateFromString:_months[section]];
-//    
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    [formatter setDateFormat:@"MMMM, YYYY"];
-//    NSString *result = [formatter stringFromDate:dte];
-//    
+    
+    //    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //    // ignore +11 and use timezone name instead of seconds from gmt
+    //    [dateFormat setDateFormat:@"YYYY-MM"];
+    //    //[dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
+    //    NSDate *dte = [dateFormat dateFromString:_months[section]];
+    //
+    //    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    //    [formatter setDateFormat:@"MMMM, YYYY"];
+    //    NSString *result = [formatter stringFromDate:dte];
+    //
     return _months[section];
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 /*
-#pragma mark - Navigation
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

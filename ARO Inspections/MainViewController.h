@@ -1,25 +1,21 @@
 //
-//  MainTableViewController.h
+//  MainViewController.h
 //  ARO Inspections
 //
-//  Created by Grant Arrowood on 12/12/16.
-//  Copyright © 2016 Piglet Products. All rights reserved.
+//  Created by Grant Arrowood on 1/12/17.
+//  Copyright © 2017 Piglet Products. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "GTLRSheets.h"
 
-
-@interface MainTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource> {
-}
-
+@interface MainViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) GTLRSheetsService *service;
 @property (strong, nonatomic) NSMutableArray *clients;
 @property (strong, nonatomic) NSMutableArray *inspections;
 @property (strong, nonatomic) NSMutableArray *months;
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
-
-
+@property (strong, nonatomic) IBOutlet UITableView *panelTableView;
 @end
