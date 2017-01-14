@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "MainTableViewCell.h"
 #import "MainPanelTableViewCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface MainViewController ()
@@ -18,7 +19,7 @@
 @implementation MainViewController
 
 static NSString *const kKeychainItemName = @"Google Sheets API";
-static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqslk.apps.googleusercontent.com";
+static NSString *const kClientID = @"986274447553-tucq0mb3v3nijbqrphka57590ecompgv.apps.googleusercontent.com";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,6 +29,9 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
                                            }
                                        browserAuth:YES];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PikeLogo"]];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings-icon"] style:UIBarButtonItemStylePlain target:self action:@selector(openSettingsView:)];
+    _settingsView.layer.cornerRadius = 5;
+
     // Do any additional setup after loading the view.
 }
 
@@ -36,37 +40,26 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     _months = [[NSMutableArray alloc] init];
     _inspections = [[NSMutableArray alloc] init];
     _panelInspections = [[NSMutableArray alloc] init];
-
-    
-    if (!self.service.authorizer.canAuthorize) {
-        // Not yet authorized, request authorization by pushing the login UI onto the UI stack.
-        [self presentViewController:[self createAuthController] animated:YES completion:nil];
-        
-        self.service = [[GTLRSheetsService alloc] init];
-        self.service.authorizer =
-        [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
-                                                              clientID:kClientID
-                                                          clientSecret:nil];
-    } else {
-        [self getSections];
-    }
+    self.service = [[GTLRSheetsService alloc] init];
+    self.service.APIKey = @"AIzaSyBmnayB-N5K9eaGQulm9h7XRmU3RiC-Pk0";
+    [self getSections];
     
 }
 
 
 - (void)getSections {
-    NSString *spreadsheet2Id = @"1CUaJ5V3qxoSoCulGTjyxh6r7hcT3WsM6R0R3fX1vQp8";
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *spreadsheetId = [defaults valueForKey:@"SpreadsheetID"];
+
     NSString *range2 = @"Clients!A2:D";
     
     GTLRSheetsQuery_SpreadsheetsValuesGet *query2 =
-    [GTLRSheetsQuery_SpreadsheetsValuesGet queryWithSpreadsheetId:spreadsheet2Id
+    [GTLRSheetsQuery_SpreadsheetsValuesGet queryWithSpreadsheetId:spreadsheetId
                                                             range:range2];
-    
     [self.service executeQuery:query2
                       delegate:self
              didFinishSelector:@selector(displayResultsWithTicket:finishedWithObject:error:)];
     
-    NSString *spreadsheetId = @"1CUaJ5V3qxoSoCulGTjyxh6r7hcT3WsM6R0R3fX1vQp8";
     NSString *range = @"Inspections!A2:G";
     
     GTLRSheetsQuery_SpreadsheetsValuesGet *query =
@@ -85,6 +78,7 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     if (error == nil) {
         NSArray *rows = result.values;
         if (rows.count > 0) {
+            NSMutableArray *reveredMonths = [[NSMutableArray alloc] init];
             for (NSArray *row in rows) {
                 //build _inspections and _months
                 if (row.count > 5) {
@@ -115,14 +109,15 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
                     NSString *yearMonth;
                     if(row5.length > 6) {
                         yearMonth = [row5 substringToIndex:7];
-                        if (![_months containsObject:yearMonth]) {
-                            [_months addObject:yearMonth];
+                        if (![reveredMonths containsObject:yearMonth]) {
+                            [reveredMonths addObject:yearMonth];
                         }
                     }
                     
                 }
                 
             }
+            _months = [[reveredMonths reverseObjectEnumerator] allObjects];
             [_mainTableView reloadData];
         } else {
         }
@@ -319,8 +314,21 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
         }
         [_panelTableView reloadData];
         self.panelCloseView.hidden = NO;
-        self.mainTableView.transform = CGAffineTransformMakeTranslation(-50, 0);
-        self.panelTableView.transform = CGAffineTransformMakeTranslation(-265, 0);
+        self.panelTableView.clipsToBounds = NO;
+        self.panelTableView.layer.masksToBounds = NO;
+        [self.panelTableView.layer setShadowColor:[[UIColor grayColor] CGColor]];
+        [self.panelTableView.layer setShadowOffset:CGSizeMake(0, 0)];
+        [self.panelTableView.layer setShadowRadius:5.0];
+        [self.panelTableView.layer setShadowOpacity:1];
+        [UIView animateWithDuration:1.0
+                         animations:^{
+                             if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+                             {
+                                 self.panelTableView.transform = CGAffineTransformMakeTranslation(-370, 0);
+                             } else {
+                                 self.panelTableView.transform = CGAffineTransformMakeTranslation(-265, 0);
+                             }
+                         }];
     }
     
     
@@ -401,8 +409,18 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
                       //              self.fileWebView.image = [UIImage imageWithData:data];
                       NSURLRequest *request = [NSURLRequest requestWithURL:destination];
                       [_dropboxWebView loadRequest:request];
+                      _popOverView.transform = CGAffineTransformMakeScale(0.01, 0.01);
                       _popOverView.hidden = NO;
                       _popoverCloseView.hidden = NO;
+                      [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                          // animate it to the identity transform (100% scale)
+                          _popOverView.transform = CGAffineTransformIdentity;
+                          _popoverCloseView.backgroundColor = [UIColor grayColor];
+                          _popoverCloseView.alpha = .4;
+                      } completion:^(BOOL finished){
+                          // if you want to do something once the animation finishes, put it here
+                      }];
+
                   } else {
                       NSLog(@"%@\n%@\n", routeError, error);
                   }
@@ -457,6 +475,89 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
  }
  */
 
+- (BOOL)textFieldShouldReturn:(UITextField*)textField {
+    [textField resignFirstResponder];
+    if (textField == self.dropBoxEmailTextField) {
+        self.settingsView.transform = CGAffineTransformMakeTranslation(0, 0);
+    }
+    if (textField == self.dropBoxPasswordTextField) {
+        self.settingsView.transform = CGAffineTransformMakeTranslation(0, 0);
+    }
+    return YES;
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (textField == self.dropBoxEmailTextField) {
+        self.settingsView.transform = CGAffineTransformMakeTranslation(0, -75);
+    }
+    if (textField == self.dropBoxPasswordTextField) {
+        self.settingsView.transform = CGAffineTransformMakeTranslation(0, -80);
+    }
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+    [self textFieldShouldReturn:_dropBoxEmailTextField];
+}
+
+-(IBAction)openSettingsView:(id)sender {
+    if (self.popOverView.hidden) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *spreadsheetId = [defaults valueForKey:@"SpreadsheetID"];
+        self.sheetsIDTextField.text = spreadsheetId;
+        NSString *googleEmail = [defaults valueForKey:@"GoogleEmail"];
+        self.googleEmailTextField.text = googleEmail;
+        NSString *googlePassword = [defaults valueForKey:@"GooglePassword"];
+        self.googlePasswodTextField.text = googlePassword;
+        NSString *dropboxEmail = [defaults valueForKey:@"DropBoxEmail"];
+        self.dropBoxEmailTextField.text = dropboxEmail;
+        NSString *dropboxPassword = [defaults valueForKey:@"DropBoxPassword"];
+        self.dropBoxPasswordTextField.text = dropboxPassword;
+        self.settingsView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+        self.settingsView.hidden = NO;
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            // animate it to the identity transform (100% scale)
+            self.settingsView.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished){
+            // if you want to do something once the animation finishes, put it here
+        }];
+
+    } else {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *spreadsheetId = [defaults valueForKey:@"SpreadsheetID"];
+        self.sheetsIDTextField.text = spreadsheetId;
+        NSString *googleEmail = [defaults valueForKey:@"GoogleEmail"];
+        self.googleEmailTextField.text = googleEmail;
+        NSString *googlePassword = [defaults valueForKey:@"GooglePassword"];
+        self.googlePasswodTextField.text = googlePassword;
+        NSString *dropboxEmail = [defaults valueForKey:@"DropBoxEmail"];
+        self.dropBoxEmailTextField.text = dropboxEmail;
+        NSString *dropboxPassword = [defaults valueForKey:@"DropBoxPassword"];
+        self.dropBoxPasswordTextField.text = dropboxPassword;
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            // animate it to the identity transform (100% scale)
+            _popOverView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+            _popoverCloseView.backgroundColor = [UIColor grayColor];
+            _popoverCloseView.alpha = 0;
+        } completion:^(BOOL finished){
+            // if you want to do something once the animation finishes, put it here
+            self.popOverView.hidden = YES;
+            self.popoverCloseView.hidden = YES;
+            self.settingsView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+            self.settingsView.hidden = NO;
+            [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                // animate it to the identity transform (100% scale)
+                self.settingsView.transform = CGAffineTransformIdentity;
+            } completion:^(BOOL finished){
+                // if you want to do something once the animation finishes, put it here
+            }];
+        }];
+        
+        NSIndexPath *selectedrow = [self.panelTableView indexPathForSelectedRow];
+        [self.panelTableView deselectRowAtIndexPath:selectedrow animated:YES];
+    }
+}
 
 - (IBAction)closePopoverAction:(id)sender {
     self.popOverView.hidden = YES;
@@ -468,9 +569,44 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
 - (IBAction)closePanelAction:(id)sender {
     self.panelCloseView.hidden = YES;
     _panelInspections = [[NSMutableArray alloc] init];
-    self.mainTableView.transform = CGAffineTransformMakeTranslation(0, 0);
-    self.panelTableView.transform = CGAffineTransformMakeTranslation(0, 0);
     NSIndexPath *selectedrow = [self.mainTableView indexPathForSelectedRow];
     [self.mainTableView deselectRowAtIndexPath:selectedrow animated:YES];
+    [UIView animateWithDuration:1.0
+                     animations:^{
+                         self.panelTableView.transform = CGAffineTransformMakeTranslation(0, 0);
+                     } completion:^(BOOL finished){
+                         // if you want to do something once the animation finishes, put it here
+                         [self.panelTableView.layer setShadowRadius:0];
+                     }];
+
+}
+
+
+
+- (IBAction)closeSettingsViewAction:(id)sender {
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        // animate it to the identity transform (100% scale)
+        self.settingsView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    } completion:^(BOOL finished){
+        // if you want to do something once the animation finishes, put it here
+        self.settingsView.hidden = YES;
+    }];
+}
+
+- (IBAction)saveSettingsAction:(id)sender {
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        // animate it to the identity transform (100% scale)
+        self.settingsView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    } completion:^(BOOL finished){
+        // if you want to do something once the animation finishes, put it here
+        self.settingsView.hidden = YES;
+    }];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:self.googleEmailTextField.text forKey:@"GoogleEmail"];
+    [defaults setValue:self.googlePasswodTextField.text forKey:@"GooglePassword"];
+    [defaults setValue:self.dropBoxEmailTextField.text forKey:@"DropBoxEmail"];
+    [defaults setValue:self.dropBoxPasswordTextField.text forKey:@"DropBoxPassword"];
+    [defaults setValue:self.sheetsIDTextField.text forKey:@"SpreadsheetID"];
+    [defaults synchronize];
 }
 @end

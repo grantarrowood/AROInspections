@@ -310,7 +310,6 @@ finishedWithFetcher:(GTMOAuth2Fetcher *)fetcher
   NSMutableURLRequest *request;
   request = [[self class] mutableURLRequestWithURL:authorizationURL
                                        paramString:paramStr];
-
   [delegate_ performSelector:self.webRequestSelector
                   withObject:self
                   withObject:request];

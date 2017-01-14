@@ -13,15 +13,14 @@
 		9C050A2F1DFF5C8E000D0726 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A2E1DFF5C8E000D0726 /* main.m */; };
 		9C050A321DFF5C8E000D0726 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A311DFF5C8E000D0726 /* AppDelegate.m */; };
 		9C050A381DFF5C8E000D0726 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C050A361DFF5C8E000D0726 /* Main.storyboard */; };
-		9C050A3A1DFF5C8E000D0726 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C050A391DFF5C8E000D0726 /* Assets.xcassets */; };
 		9C050A3D1DFF5C8E000D0726 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C050A3B1DFF5C8E000D0726 /* LaunchScreen.storyboard */; };
 		9C050A481DFF5C8E000D0726 /* ARO_InspectionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A471DFF5C8E000D0726 /* ARO_InspectionsTests.m */; };
 		9C050A531DFF5C8E000D0726 /* ARO_InspectionsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A521DFF5C8E000D0726 /* ARO_InspectionsUITests.m */; };
-		9C050A621DFF64AA000D0726 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A611DFF64AA000D0726 /* MainTableViewController.m */; };
 		9C050A651DFF66ED000D0726 /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A641DFF66ED000D0726 /* MainTableViewCell.m */; };
 		9C050A681DFF6B54000D0726 /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C050A671DFF6B54000D0726 /* NavigationViewController.m */; };
 		9C0D30A21E287263003AC7DF /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C0D30A11E287263003AC7DF /* MainViewController.m */; };
 		9C0D30A51E28734D003AC7DF /* MainPanelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C0D30A41E28734D003AC7DF /* MainPanelTableViewCell.m */; };
+		9C0D30A71E2A7E2D003AC7DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C0D30A61E2A7E2D003AC7DF /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,7 +52,6 @@
 		9C050A301DFF5C8E000D0726 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9C050A311DFF5C8E000D0726 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9C050A371DFF5C8E000D0726 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		9C050A391DFF5C8E000D0726 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C050A3C1DFF5C8E000D0726 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C050A3E1DFF5C8E000D0726 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C050A431DFF5C8E000D0726 /* ARO InspectionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ARO InspectionsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,8 +60,6 @@
 		9C050A4E1DFF5C8E000D0726 /* ARO InspectionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ARO InspectionsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C050A521DFF5C8E000D0726 /* ARO_InspectionsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARO_InspectionsUITests.m; sourceTree = "<group>"; };
 		9C050A541DFF5C8E000D0726 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9C050A601DFF64AA000D0726 /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
-		9C050A611DFF64AA000D0726 /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
 		9C050A631DFF66ED000D0726 /* MainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewCell.h; sourceTree = "<group>"; };
 		9C050A641DFF66ED000D0726 /* MainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewCell.m; sourceTree = "<group>"; };
 		9C050A661DFF6B54000D0726 /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
@@ -72,6 +68,7 @@
 		9C0D30A11E287263003AC7DF /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		9C0D30A31E28734D003AC7DF /* MainPanelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPanelTableViewCell.h; sourceTree = "<group>"; };
 		9C0D30A41E28734D003AC7DF /* MainPanelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPanelTableViewCell.m; sourceTree = "<group>"; };
+		9C0D30A61E2A7E2D003AC7DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD367D3B2F99971F5AD3DBA4 /* libPods-ARO InspectionsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ARO InspectionsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F547460ACA6FA2E2967C6CFA /* Pods-ARO Inspections.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARO Inspections.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARO Inspections/Pods-ARO Inspections.debug.xcconfig"; sourceTree = "<group>"; };
 		FABA8983A68BBD6A3CBE70F9 /* Pods-ARO InspectionsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARO InspectionsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARO InspectionsTests/Pods-ARO InspectionsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -142,8 +139,6 @@
 			children = (
 				9C050A301DFF5C8E000D0726 /* AppDelegate.h */,
 				9C050A311DFF5C8E000D0726 /* AppDelegate.m */,
-				9C050A601DFF64AA000D0726 /* MainTableViewController.h */,
-				9C050A611DFF64AA000D0726 /* MainTableViewController.m */,
 				9C0D30A31E28734D003AC7DF /* MainPanelTableViewCell.h */,
 				9C0D30A41E28734D003AC7DF /* MainPanelTableViewCell.m */,
 				9C0D30A01E287263003AC7DF /* MainViewController.h */,
@@ -153,7 +148,7 @@
 				9C050A661DFF6B54000D0726 /* NavigationViewController.h */,
 				9C050A671DFF6B54000D0726 /* NavigationViewController.m */,
 				9C050A361DFF5C8E000D0726 /* Main.storyboard */,
-				9C050A391DFF5C8E000D0726 /* Assets.xcassets */,
+				9C0D30A61E2A7E2D003AC7DF /* Assets.xcassets */,
 				9C050A3B1DFF5C8E000D0726 /* LaunchScreen.storyboard */,
 				9C050A3E1DFF5C8E000D0726 /* Info.plist */,
 				9C050A2D1DFF5C8E000D0726 /* Supporting Files */,
@@ -318,7 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C050A3D1DFF5C8E000D0726 /* LaunchScreen.storyboard in Resources */,
-				9C050A3A1DFF5C8E000D0726 /* Assets.xcassets in Resources */,
+				9C0D30A71E2A7E2D003AC7DF /* Assets.xcassets in Resources */,
 				9C050A381DFF5C8E000D0726 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,7 +462,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C050A621DFF64AA000D0726 /* MainTableViewController.m in Sources */,
 				9C0D30A21E287263003AC7DF /* MainViewController.m in Sources */,
 				9C050A321DFF5C8E000D0726 /* AppDelegate.m in Sources */,
 				9C050A681DFF6B54000D0726 /* NavigationViewController.m in Sources */,
