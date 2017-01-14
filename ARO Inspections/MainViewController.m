@@ -325,8 +325,10 @@ static NSString *const kClientID = @"986274447553-tucq0mb3v3nijbqrphka57590ecomp
                              if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
                              {
                                  self.panelTableView.transform = CGAffineTransformMakeTranslation(-370, 0);
+                                 self.panelCloseView.transform = CGAffineTransformMakeTranslation(-370, 0);
                              } else {
                                  self.panelTableView.transform = CGAffineTransformMakeTranslation(-265, 0);
+                                 self.panelCloseView.transform = CGAffineTransformMakeTranslation(-265, 0);
                              }
                          }];
     }
@@ -574,6 +576,7 @@ static NSString *const kClientID = @"986274447553-tucq0mb3v3nijbqrphka57590ecomp
     [UIView animateWithDuration:1.0
                      animations:^{
                          self.panelTableView.transform = CGAffineTransformMakeTranslation(0, 0);
+                         self.panelCloseView.transform = CGAffineTransformMakeTranslation(0, 0);
                      } completion:^(BOOL finished){
                          // if you want to do something once the animation finishes, put it here
                          [self.panelTableView.layer setShadowRadius:0];
