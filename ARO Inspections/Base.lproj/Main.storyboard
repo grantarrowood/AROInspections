@@ -115,6 +115,7 @@
                                 <frame key="frameInset" minX="375" width="375" height="623"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="panelCell" rowHeight="63" id="BdK-Pd-jWi" customClass="MainPanelTableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="63"/>
@@ -158,16 +159,60 @@
                                     <outlet property="delegate" destination="6B9-qs-4X0" id="Tm0-z3-AHX"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p7f-cF-rhc">
+                                <frame key="frameInset" width="110" height="623"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="sPV-N0-78Z" appends="YES" id="Lbc-Sq-76O"/>
+                                </connections>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ZT-k1-sMs">
+                                <frame key="frameInset" width="375" height="623"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="boN-R0-wxF" appends="YES" id="Ork-jR-Syp"/>
+                                </connections>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V1b-GM-aRk">
+                                <frame key="frameInset" minX="42" minY="20" width="291" height="557"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lEh-K5-zxr">
+                                        <frame key="frameInset" width="291" height="557"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </webView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="cCY-Ex-wZL"/>
                     <connections>
+                        <outlet property="dropboxWebView" destination="lEh-K5-zxr" id="DYb-dt-Cyq"/>
                         <outlet property="mainTableView" destination="aDQ-XV-LZC" id="VFS-6N-jn4"/>
+                        <outlet property="panelCloseView" destination="p7f-cF-rhc" id="I7a-Js-mNp"/>
                         <outlet property="panelTableView" destination="NNY-tt-1N3" id="ocr-c4-xOV"/>
+                        <outlet property="popOverView" destination="V1b-GM-aRk" id="jiR-gl-ItH"/>
+                        <outlet property="popoverCloseView" destination="6ZT-k1-sMs" id="oYM-QF-icO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8eb-ct-934" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="boN-R0-wxF">
+                    <connections>
+                        <action selector="closePopoverAction:" destination="6B9-qs-4X0" id="nyf-ix-Egm"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="sPV-N0-78Z">
+                    <connections>
+                        <action selector="closePanelAction:" destination="6B9-qs-4X0" id="fUf-l0-cyK"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1117.5999999999999" y="342.27886056971516"/>
         </scene>

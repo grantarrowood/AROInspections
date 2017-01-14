@@ -22,6 +22,11 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [DropboxClientsManager authorizeFromController:[UIApplication sharedApplication]
+                                        controller:self
+                                           openURL:^(NSURL *url){ [[UIApplication sharedApplication] openURL:url];
+                                           }
+                                       browserAuth:YES];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PikeLogo"]];
     // Do any additional setup after loading the view.
 }
@@ -240,7 +245,7 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
         MainPanelTableViewCell *cell = [self.panelTableView dequeueReusableCellWithIdentifier:@"panelCell" forIndexPath:indexPath];
         cell.jobLocationLabel.text = [[_panelInspections objectAtIndex:indexPath.row] valueForKey:@"Location"];
         cell.dateLabel.text = [[_panelInspections objectAtIndex:indexPath.row] valueForKey:@"Date"];
-        cell.inspectorsNameLabel.text = [[_panelInspections objectAtIndex:indexPath.row] valueForKey:@"InspectionID"];
+        cell.inspectorsNameLabel.text = [[_panelInspections objectAtIndex:indexPath.row] valueForKey:@"InspectorName"];
         return cell;
     }
     
@@ -313,16 +318,100 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
             }
         }
         [_panelTableView reloadData];
+        self.panelCloseView.hidden = NO;
         self.mainTableView.transform = CGAffineTransformMakeTranslation(-50, 0);
         self.panelTableView.transform = CGAffineTransformMakeTranslation(-265, 0);
     }
     
     
     
+    if (tableView == self.panelTableView) {
+        DropboxClient *client = [DropboxClientsManager authorizedClient];
+        NSString *searchPath = @"/Apps/ProntoForms/ClientSafetyInspectionsProntoForms";
+        [[client.filesRoutes listFolder:searchPath]
+         response:^(DBFILESListFolderResult *result, DBFILESListFolderError *routeError, DBError *error) {
+             if (result) {
+                 [self displayPhotos:result.entries atIndex:indexPath.row];
+             } else {
+                 NSString *title = @"";
+                 NSString *message = @"";
+                 if (routeError) {
+                     // Route-specific request error
+                     title = @"Route-specific error";
+                     if ([routeError isPath]) {
+                         message = [NSString stringWithFormat:@"Invalid path: %@", routeError.path];
+                     }
+                 } else {
+                     // Generic request error
+                     title = @"Generic request error";
+                     if ([error isInternalServerError]) {
+                         DBRequestInternalServerError *internalServerError = [error asInternalServerError];
+                         message = [NSString stringWithFormat:@"%@", internalServerError];
+                     } else if ([error isBadInputError]) {
+                         DBRequestBadInputError *badInputError = [error asBadInputError];
+                         message = [NSString stringWithFormat:@"%@", badInputError];
+                     } else if ([error isAuthError]) {
+                         DBRequestAuthError *authError = [error asAuthError];
+                         message = [NSString stringWithFormat:@"%@", authError];
+                     } else if ([error isRateLimitError]) {
+                         DBRequestRateLimitError *rateLimitError = [error asRateLimitError];
+                         message = [NSString stringWithFormat:@"%@", rateLimitError];
+                     } else if ([error isHttpError]) {
+                         DBRequestHttpError *genericHttpError = [error asHttpError];
+                         message = [NSString stringWithFormat:@"%@", genericHttpError];
+                     } else if ([error isClientError]) {
+                         DBRequestClientError *genericLocalError = [error asClientError];
+                         message = [NSString stringWithFormat:@"%@", genericLocalError];
+                     }
+                 }
+                 
+                 UIAlertController *alertController =
+                 [UIAlertController alertControllerWithTitle:title
+                                                     message:message
+                                              preferredStyle:(UIAlertControllerStyle)UIAlertControllerStyleAlert];
+                 [alertController addAction:[UIAlertAction actionWithTitle:@"OK"
+                                                                     style:(UIAlertActionStyle)UIAlertActionStyleCancel
+                                                                   handler:nil]];
+                 [self presentViewController:alertController animated:YES completion:nil];
+             }
+         }];
+    }
+    
+    
 
 }
 
 
+- (void)displayPhotos:(NSArray<DBFILESMetadata *> *)folderEntries atIndex:(NSInteger)indexPath{
+    for (DBFILESMetadata *entry in folderEntries) {
+        NSString *itemName = entry.name;
+        NSArray *allComponents = [itemName componentsSeparatedByString:@"-"];
+        NSLog(@"%@", allComponents[0]);
+        NSLog(@"%@", [[_panelInspections objectAtIndex:indexPath] valueForKey:@"InspectionID"]);
+        if ([allComponents[0] isEqualToString: [[_panelInspections objectAtIndex:indexPath] valueForKey:@"InspectionID"]]) {
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSURL *outputDirectory = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask][0];
+            NSURL *outputUrl = [outputDirectory URLByAppendingPathComponent:entry.name];
+            DropboxClient *client = [DropboxClientsManager authorizedClient];
+            [[[client.filesRoutes downloadUrl:entry.pathDisplay overwrite:YES destination:outputUrl]
+              response:^(DBFILESFileMetadata *result, DBFILESDownloadError *routeError, DBError *error, NSURL *destination) {
+                  if (result) {
+                      //              NSLog(@"%@\n", result);
+                      //              NSData *data = [[NSFileManager defaultManager] contentsAtPath:[destination path]];
+                      //              self.fileWebView.image = [UIImage imageWithData:data];
+                      NSURLRequest *request = [NSURLRequest requestWithURL:destination];
+                      [_dropboxWebView loadRequest:request];
+                      _popOverView.hidden = NO;
+                      _popoverCloseView.hidden = NO;
+                  } else {
+                      NSLog(@"%@\n%@\n", routeError, error);
+                  }
+              }] progress:^(int64_t bytesDownloaded, int64_t totalBytesDownloaded, int64_t totalBytesExpectedToDownload) {
+                  NSLog(@"%lld\n%lld\n%lld\n", bytesDownloaded, totalBytesDownloaded, totalBytesExpectedToDownload);
+              }];
+        }
+    }
+}
 
 /*
  // Override to support conditional editing of the table view.
@@ -369,4 +458,19 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
  */
 
 
+- (IBAction)closePopoverAction:(id)sender {
+    self.popOverView.hidden = YES;
+    self.popoverCloseView.hidden = YES;
+    NSIndexPath *selectedrow = [self.panelTableView indexPathForSelectedRow];
+    [self.panelTableView deselectRowAtIndexPath:selectedrow animated:YES];
+}
+
+- (IBAction)closePanelAction:(id)sender {
+    self.panelCloseView.hidden = YES;
+    _panelInspections = [[NSMutableArray alloc] init];
+    self.mainTableView.transform = CGAffineTransformMakeTranslation(0, 0);
+    self.panelTableView.transform = CGAffineTransformMakeTranslation(0, 0);
+    NSIndexPath *selectedrow = [self.mainTableView indexPathForSelectedRow];
+    [self.mainTableView deselectRowAtIndexPath:selectedrow animated:YES];
+}
 @end
