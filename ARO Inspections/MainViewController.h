@@ -12,7 +12,6 @@
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 
 @interface MainViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
-
 - (IBAction)closePopoverAction:(id)sender;
 - (IBAction)closePanelAction:(id)sender;
 - (IBAction)closeSettingsViewAction:(id)sender;

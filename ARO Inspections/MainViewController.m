@@ -19,29 +19,42 @@
 @implementation MainViewController
 
 static NSString *const kKeychainItemName = @"Google Sheets API";
-static NSString *const kClientID = @"986274447553-tucq0mb3v3nijbqrphka57590ecompgv.apps.googleusercontent.com";
+//static NSString *const kClientID = @"986274447553-tucq0mb3v3nijbqrphka57590ecompgv.apps.googleusercontent.com";
+static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqslk.apps.googleusercontent.com";
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [DropboxClientsManager authorizeFromController:[UIApplication sharedApplication]
                                         controller:self
-                                           openURL:^(NSURL *url){ [[UIApplication sharedApplication] openURL:url];
+                                           openURL:^(NSURL *url){
+                                               [[UIApplication sharedApplication] openURL:url];
                                            }
                                        browserAuth:YES];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PikeLogo"]];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings-icon"] style:UIBarButtonItemStylePlain target:self action:@selector(openSettingsView:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(openAddView:)];
     _settingsView.layer.cornerRadius = 5;
-
+//    self.service.authorizer =
+//    [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
+//                                                          clientID:kClientID
+//                                                      clientSecret:nil];
     // Do any additional setup after loading the view.
 }
 
 -(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
     _clients = [[NSMutableArray alloc] init];
     _months = [[NSMutableArray alloc] init];
     _inspections = [[NSMutableArray alloc] init];
     _panelInspections = [[NSMutableArray alloc] init];
     self.service = [[GTLRSheetsService alloc] init];
-    self.service.APIKey = @"AIzaSyBmnayB-N5K9eaGQulm9h7XRmU3RiC-Pk0";
+    self.service.authorizer =
+    [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
+                                                          clientID:kClientID
+                                                      clientSecret:nil];
+    self.service.APIKey = @"AIzaSyCivDyonDkOvbRz8xSrVDI-Kko3_lwcaxc";
     [self getSections];
     
 }
@@ -155,7 +168,7 @@ static NSString *const kClientID = @"986274447553-tucq0mb3v3nijbqrphka57590ecomp
     GTMOAuth2ViewControllerTouch *authController;
     // If modifying these scopes, delete your previously saved credentials by
     // resetting the iOS simulator or uninstall the app.
-    NSArray *scopes = [NSArray arrayWithObjects:kGTLRAuthScopeSheetsSpreadsheetsReadonly, nil];
+    NSArray *scopes = [NSArray arrayWithObjects:kGTLRAuthScopeSheetsSpreadsheets, nil];
     authController = [[GTMOAuth2ViewControllerTouch alloc]
                       initWithScope:[scopes componentsJoinedByString:@" "]
                       clientID:kClientID
@@ -166,8 +179,6 @@ static NSString *const kClientID = @"986274447553-tucq0mb3v3nijbqrphka57590ecomp
     return authController;
 }
 
-// Handle completion of the authorization process, and update the Google Sheets API
-// with the new credentials.
 - (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
       finishedWithAuth:(GTMOAuth2Authentication *)authResult
                  error:(NSError *)error {
@@ -612,4 +623,34 @@ static NSString *const kClientID = @"986274447553-tucq0mb3v3nijbqrphka57590ecomp
     [defaults setValue:self.sheetsIDTextField.text forKey:@"SpreadsheetID"];
     [defaults synchronize];
 }
+
+-(IBAction)openAddView:(id)sender {
+    if (!self.service.authorizer.canAuthorize) {
+        // Not yet authorized, request authorization by pushing the login UI onto the UI stack.
+        [self presentViewController:[self createAuthController] animated:YES completion:nil];
+    } else {
+        [self addToSheets];
+    }
+}
+-(void)addToSheets {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *spreadsheetId = [defaults valueForKey:@"SpreadsheetID"];
+    
+    GTLRSheets_ValueRange *valueRange = [[GTLRSheets_ValueRange alloc] init];
+    //valueRange.range = @"Class Data!A2:G";
+    valueRange.majorDimension = kGTLRSheetsMajorDimensionRows;
+    valueRange.values = [NSArray arrayWithObjects:[NSArray arrayWithObjects:@"1852400019", [NSString stringWithFormat:@"%@", [NSDate date]], @"20161211-1852400015", @"Lennar Corporation", @"Lot 81 Sanctuary", @"2016-12-30", @"Mitchell Smith", nil], nil];
+    GTLRSheetsQuery_SpreadsheetsValuesAppend *append = [GTLRSheetsQuery_SpreadsheetsValuesAppend queryWithObject:valueRange spreadsheetId:spreadsheetId range:@"Inspections!A2:G"];
+    append.valueInputOption = kGTLRSheetsValueInputOptionUserEntered;
+    append.insertDataOption = kGTLRSheetsInsertDataOptionInsertRows;
+    [self.service executeQuery:append delegate:self didFinishSelector:@selector(displayWithTicket:finishedWithObject:error:)];
+}
+
+- (void)displayWithTicket:(GTLRServiceTicket *)ticket
+              finishedWithObject:(GTLRSheets_ValueRange *)result
+                           error:(NSError *)error {
+    
+
+}
+
 @end

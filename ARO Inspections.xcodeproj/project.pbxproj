@@ -21,6 +21,7 @@
 		9C0D30A21E287263003AC7DF /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C0D30A11E287263003AC7DF /* MainViewController.m */; };
 		9C0D30A51E28734D003AC7DF /* MainPanelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C0D30A41E28734D003AC7DF /* MainPanelTableViewCell.m */; };
 		9C0D30A71E2A7E2D003AC7DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C0D30A61E2A7E2D003AC7DF /* Assets.xcassets */; };
+		9CAD3DAC1E3D209B008CCE5F /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAD3DAB1E3D209B008CCE5F /* TestViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		9C0D30A31E28734D003AC7DF /* MainPanelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPanelTableViewCell.h; sourceTree = "<group>"; };
 		9C0D30A41E28734D003AC7DF /* MainPanelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPanelTableViewCell.m; sourceTree = "<group>"; };
 		9C0D30A61E2A7E2D003AC7DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9CAD3DAA1E3D209B008CCE5F /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		9CAD3DAB1E3D209B008CCE5F /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		BD367D3B2F99971F5AD3DBA4 /* libPods-ARO InspectionsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ARO InspectionsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F547460ACA6FA2E2967C6CFA /* Pods-ARO Inspections.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARO Inspections.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARO Inspections/Pods-ARO Inspections.debug.xcconfig"; sourceTree = "<group>"; };
 		FABA8983A68BBD6A3CBE70F9 /* Pods-ARO InspectionsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARO InspectionsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARO InspectionsTests/Pods-ARO InspectionsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -152,6 +155,8 @@
 				9C050A3B1DFF5C8E000D0726 /* LaunchScreen.storyboard */,
 				9C050A3E1DFF5C8E000D0726 /* Info.plist */,
 				9C050A2D1DFF5C8E000D0726 /* Supporting Files */,
+				9CAD3DAA1E3D209B008CCE5F /* TestViewController.h */,
+				9CAD3DAB1E3D209B008CCE5F /* TestViewController.m */,
 			);
 			path = "ARO Inspections";
 			sourceTree = "<group>";
@@ -464,6 +469,7 @@
 			files = (
 				9C0D30A21E287263003AC7DF /* MainViewController.m in Sources */,
 				9C050A321DFF5C8E000D0726 /* AppDelegate.m in Sources */,
+				9CAD3DAC1E3D209B008CCE5F /* TestViewController.m in Sources */,
 				9C050A681DFF6B54000D0726 /* NavigationViewController.m in Sources */,
 				9C050A651DFF66ED000D0726 /* MainTableViewCell.m in Sources */,
 				9C0D30A51E28734D003AC7DF /* MainPanelTableViewCell.m in Sources */,
@@ -543,6 +549,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -591,7 +598,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -617,6 +625,7 @@
 			baseConfigurationReference = F547460ACA6FA2E2967C6CFA /* Pods-ARO Inspections.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 4VLU4CB777;
 				INFOPLIST_FILE = "ARO Inspections/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -630,6 +639,7 @@
 			baseConfigurationReference = 4CB7FC71106A7A28F10B3E95 /* Pods-ARO Inspections.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 4VLU4CB777;
 				INFOPLIST_FILE = "ARO Inspections/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

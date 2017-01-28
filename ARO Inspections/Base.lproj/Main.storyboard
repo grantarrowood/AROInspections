@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vL9-R9-ieh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vL9-R9-ieh">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,21 +23,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="63" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aDQ-XV-LZC">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="mainCell" rowHeight="63" id="Ikc-xo-cf0" customClass="MainTableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ikc-xo-cf0" id="57B-gr-UW2">
-                                            <frame key="frameInset" width="375" height="63"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="62"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Client's Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4On-Mf-dUF">
+                                                    <rect key="frame" x="20" y="8" width="325" height="26.5"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 Visits Remaining" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8t-HK-fy4">
+                                                    <rect key="frame" x="20" y="34" width="103" height="20.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="103" id="hIy-kh-wG3"/>
                                                     </constraints>
@@ -64,6 +70,7 @@
                                 </connections>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="63" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NNY-tt-1N3">
+                                <rect key="frame" x="375" y="0.0" width="375" height="623"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -74,15 +81,17 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BdK-Pd-jWi" id="Z5S-vF-M7l">
-                                            <frame key="frameInset" width="375" height="63"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="62"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Job Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bp5-Jt-Gvp">
+                                                    <rect key="frame" x="20" y="8" width="347" height="27.5"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMZ-Wx-y7X">
+                                                    <rect key="frame" x="20" y="34" width="103" height="20.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="103" id="Iyf-dX-fpJ"/>
                                                     </constraints>
@@ -91,6 +100,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inspectors Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="by7-4c-Wul">
+                                                    <rect key="frame" x="136" y="34" width="103" height="20.5"/>
                                                     <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="15"/>
                                                     <color key="textColor" red="1" green="0.03014565537" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -120,6 +130,7 @@
                                 </connections>
                             </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p7f-cF-rhc">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -127,6 +138,7 @@
                                 </connections>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ZT-k1-sMs">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -134,8 +146,10 @@
                                 </connections>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V1b-GM-aRk">
+                                <rect key="frame" x="42" y="20" width="291" height="557"/>
                                 <subviews>
                                     <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lEh-K5-zxr">
+                                        <rect key="frame" x="0.0" y="0.0" width="291" height="557"/>
                                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </webView>
                                 </subviews>
@@ -148,9 +162,10 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wLw-na-Qsq">
+                                <rect key="frame" x="16" y="33" width="343" height="557"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUe-fJ-S1k">
-                                        <frame key="frameInset" minX="301" minY="8" width="31" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUe-fJ-S1k">
+                                        <rect key="frame" x="301" y="8" width="31" height="30"/>
                                         <state key="normal" title="X">
                                             <color key="titleColor" red="1" green="0.03014565537" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -158,7 +173,8 @@
                                             <action selector="closeSettingsViewAction:" destination="6B9-qs-4X0" eventType="touchUpInside" id="9GL-T1-ala"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Google Sheets Infromation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKX-aQ-R4a">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Google Sheets Infromation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKX-aQ-R4a">
+                                        <rect key="frame" x="64" y="28" width="209" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="HMZ-Xe-SZA"/>
                                         </constraints>
@@ -167,6 +183,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sheets ID*:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cfh-mb-uqR">
+                                        <rect key="frame" x="20" y="83" width="87" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="VWe-fR-2hu"/>
                                         </constraints>
@@ -174,8 +191,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="google sheets id" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3zu-V0-wYg">
-                                        <frame key="frameInset" minX="128" minY="80" width="185" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="google sheets id" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3zu-V0-wYg">
+                                        <rect key="frame" x="129" y="80" width="183" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="51b-Oq-zdY"/>
                                         </constraints>
@@ -187,7 +204,7 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5Q-ts-083">
-                                        <frame key="frameInset" minX="20" minY="134" width="56" height="24"/>
+                                        <rect key="frame" x="20" y="134" width="56" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="Rjf-29-xgx"/>
                                         </constraints>
@@ -196,7 +213,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="google email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gem-uN-yV0">
-                                        <frame key="frameInset" minX="128" minY="131" width="184" height="30"/>
+                                        <rect key="frame" x="128" y="131" width="184" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="CYc-MY-l7f"/>
                                         </constraints>
@@ -208,7 +225,7 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDh-NB-bRg">
-                                        <frame key="frameInset" minX="20" minY="183" width="83" height="24"/>
+                                        <rect key="frame" x="20" y="183" width="83" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="Amm-H3-tvQ"/>
                                         </constraints>
@@ -217,7 +234,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="google password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xVr-gZ-clC">
-                                        <frame key="frameInset" minX="128" minY="180" width="184" height="30"/>
+                                        <rect key="frame" x="128" y="180" width="184" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="8OD-WK-6eT"/>
                                         </constraints>
@@ -229,12 +246,14 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9e2-Bj-rq0">
+                                        <rect key="frame" x="0.0" y="249" width="343" height="2"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="WCL-du-LnC"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DropBox Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9N-XA-0m9">
+                                        <rect key="frame" x="87" y="257" width="168" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="whE-oA-WfW"/>
                                         </constraints>
@@ -243,7 +262,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hbr-SP-DUC">
-                                        <frame key="frameInset" minX="20" minY="306" width="83" height="24"/>
+                                        <rect key="frame" x="20" y="306" width="83" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="Wli-Jl-JcP"/>
                                         </constraints>
@@ -252,7 +271,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="dropbox email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4dM-xH-KeM">
-                                        <frame key="frameInset" minX="128" minY="303" width="184" height="30"/>
+                                        <rect key="frame" x="128" y="303" width="184" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Hnb-x9-b4s"/>
                                         </constraints>
@@ -264,7 +283,7 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eMP-ho-rbE">
-                                        <frame key="frameInset" minX="20" minY="355" width="83" height="36"/>
+                                        <rect key="frame" x="20" y="355" width="83" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="uWJ-hU-jhS"/>
                                         </constraints>
@@ -273,7 +292,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="dropbox password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3NE-TB-VUM">
-                                        <frame key="frameInset" minX="128" minY="352" width="184" height="30"/>
+                                        <rect key="frame" x="128" y="352" width="184" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="8fC-ig-uth"/>
                                         </constraints>
@@ -285,6 +304,7 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIO-C5-D9X">
+                                        <rect key="frame" x="154" y="496" width="34" height="30"/>
                                         <state key="normal" title="Save">
                                             <color key="titleColor" red="1" green="0.03014565537" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -293,6 +313,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* Sheets ID is https://docs.google.com/spreadsheets/d/The string of characters here is the ID/edit#gid=0" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Mc-C9-qSW">
+                                        <rect key="frame" x="20" y="390" width="302" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="8db-0m-GdS"/>
                                         </constraints>
@@ -413,6 +434,34 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1010.4" y="-333.28335832083962"/>
+        </scene>
+        <!--Test View Controller-->
+        <scene sceneID="mLO-Mj-Ykl">
+            <objects>
+                <viewController id="l0p-ZI-89p" customClass="TestViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kbB-8c-tdd"/>
+                        <viewControllerLayoutGuide type="bottom" id="iSx-5x-0kH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QAi-mZ-fgC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m6K-qO-e61">
+                                <rect key="frame" x="184" y="217" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="addAction:" destination="l0p-ZI-89p" eventType="touchUpInside" id="AJn-wY-RYF"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4fd-cP-9fM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-236" y="-987"/>
         </scene>
         <!--Navigation View Controller-->
         <scene sceneID="9cc-IB-ZCM">
