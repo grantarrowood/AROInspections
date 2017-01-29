@@ -597,8 +597,16 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
 }
 
 - (IBAction)closePopoverAction:(id)sender {
-    self.popOverView.hidden = YES;
-    self.popoverCloseView.hidden = YES;
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        // animate it to the identity transform (100% scale)
+        _popOverView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+        _popoverCloseView.backgroundColor = [UIColor grayColor];
+        _popoverCloseView.alpha = 0;
+    } completion:^(BOOL finished){
+        // if you want to do something once the animation finishes, put it here
+        self.popOverView.hidden = YES;
+        self.popoverCloseView.hidden = YES;
+    }];
     NSIndexPath *selectedrow = [self.panelTableView indexPathForSelectedRow];
     [self.panelTableView deselectRowAtIndexPath:selectedrow animated:YES];
 }
@@ -684,14 +692,37 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
         // Not yet authorized, request authorization by pushing the login UI onto the UI stack.
         [self presentViewController:[self createAuthController] animated:YES completion:nil];
     } else {
-        self.addInspectionView.transform = CGAffineTransformMakeScale(0.01, 0.01);
-        self.addInspectionView.hidden = NO;
-        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            // animate it to the identity transform (100% scale)
-            self.addInspectionView.transform = CGAffineTransformIdentity;
-        } completion:^(BOOL finished){
-            // if you want to do something once the animation finishes, put it here
-        }];
+        if(_settingsView.hidden && _popOverView.hidden) {
+            self.addInspectionView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+            self.addInspectionView.hidden = NO;
+            [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                // animate it to the identity transform (100% scale)
+                self.addInspectionView.transform = CGAffineTransformIdentity;
+            } completion:^(BOOL finished){
+                // if you want to do something once the animation finishes, put it here
+            }];
+        } else if (_settingsView.hidden && !_popOverView.hidden) {
+            [self closePopoverAction:self];
+            self.addInspectionView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+            self.addInspectionView.hidden = NO;
+            [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                // animate it to the identity transform (100% scale)
+                self.addInspectionView.transform = CGAffineTransformIdentity;
+            } completion:^(BOOL finished){
+                // if you want to do something once the animation finishes, put it here
+            }];
+        } else {
+            [self closeSettingsViewAction:self];
+            self.addInspectionView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+            self.addInspectionView.hidden = NO;
+            [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                // animate it to the identity transform (100% scale)
+                self.addInspectionView.transform = CGAffineTransformIdentity;
+            } completion:^(BOOL finished){
+                // if you want to do something once the animation finishes, put it here
+            }];
+        }
+
     }
 }
 
