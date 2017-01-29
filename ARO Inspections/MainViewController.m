@@ -36,11 +36,17 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings-icon"] style:UIBarButtonItemStylePlain target:self action:@selector(openSettingsView:)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(openAddView:)];
     _settingsView.layer.cornerRadius = 5;
-//    self.service.authorizer =
-//    [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
-//                                                          clientID:kClientID
-//                                                      clientSecret:nil];
+    _addInspectionView.layer.cornerRadius = 5;
     // Do any additional setup after loading the view.
+    datePicker = [[UIDatePicker alloc] init];
+    datePicker.datePickerMode = UIDatePickerModeDate;
+    [self.addInspectionDateTextField setInputView:datePicker];
+    UIToolbar *toolBar=[[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    [toolBar setTintColor:[UIColor grayColor]];
+    UIBarButtonItem *doneBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(ShowSelectedDate)];
+    UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    [toolBar setItems:[NSArray arrayWithObjects:space,doneBtn, nil]];
+    [self.addInspectionDateTextField setInputAccessoryView:toolBar];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -288,17 +294,18 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if (tableView == _mainTableView) {
-        return _months[section];
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        // ignore +11 and use timezone name instead of seconds from gmt
+        [dateFormat setDateFormat:@"yyyy-MM"];
+        //[dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
+        NSDate *dte = [dateFormat dateFromString:_months[section]];
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MMMM, YYYY"];
+        NSString *result = [formatter stringFromDate:dte];
+
+        return result;
     }
-    //    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    //    // ignore +11 and use timezone name instead of seconds from gmt
-    //    [dateFormat setDateFormat:@"YYYY-MM"];
-    //    //[dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
-    //    NSDate *dte = [dateFormat dateFromString:_months[section]];
-    //
-    //    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    //    [formatter setDateFormat:@"MMMM, YYYY"];
-    //    NSString *result = [formatter stringFromDate:dte];
     return @"";
 
 }
@@ -496,6 +503,12 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     if (textField == self.dropBoxPasswordTextField) {
         self.settingsView.transform = CGAffineTransformMakeTranslation(0, 0);
     }
+    if (textField == self.addInspectorsNameTextField) {
+        self.addInspectionView.transform = CGAffineTransformMakeTranslation(0, 0);
+    }
+    if (textField == self.addInspectionDateTextField) {
+        self.addInspectionView.transform = CGAffineTransformMakeTranslation(0, 0);
+    }
     return YES;
 }
 
@@ -506,12 +519,23 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     if (textField == self.dropBoxPasswordTextField) {
         self.settingsView.transform = CGAffineTransformMakeTranslation(0, -80);
     }
+    if (textField == self.addInspectorsNameTextField) {
+        self.addInspectionView.transform = CGAffineTransformMakeTranslation(0, -92);
+    }
+    if (textField == self.addInspectionDateTextField) {
+        self.addInspectionView.transform = CGAffineTransformMakeTranslation(0, -80);
+    }
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
     [self textFieldShouldReturn:_dropBoxEmailTextField];
+    [self textFieldShouldReturn:_dropBoxPasswordTextField];
+    [self textFieldShouldReturn:_addInspectorsNameTextField];
+    [self textFieldShouldReturn:_addInspectionDateTextField];
+
+
 }
 
 -(IBAction)openSettingsView:(id)sender {
@@ -624,27 +648,60 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     [defaults synchronize];
 }
 
--(IBAction)openAddView:(id)sender {
-    if (!self.service.authorizer.canAuthorize) {
-        // Not yet authorized, request authorization by pushing the login UI onto the UI stack.
-        [self presentViewController:[self createAuthController] animated:YES completion:nil];
-    } else {
-        [self addToSheets];
-    }
+- (IBAction)closeAddView:(id)sender {
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        // animate it to the identity transform (100% scale)
+        self.addInspectionView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    } completion:^(BOOL finished){
+        // if you want to do something once the animation finishes, put it here
+        self.addInspectionView.hidden = YES;
+    }];
 }
--(void)addToSheets {
+
+- (IBAction)addInspectionAction:(id)sender {
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        // animate it to the identity transform (100% scale)
+        self.addInspectionView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    } completion:^(BOOL finished){
+        // if you want to do something once the animation finishes, put it here
+        self.addInspectionView.hidden = YES;
+    }];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *spreadsheetId = [defaults valueForKey:@"SpreadsheetID"];
     
     GTLRSheets_ValueRange *valueRange = [[GTLRSheets_ValueRange alloc] init];
     //valueRange.range = @"Class Data!A2:G";
     valueRange.majorDimension = kGTLRSheetsMajorDimensionRows;
-    valueRange.values = [NSArray arrayWithObjects:[NSArray arrayWithObjects:@"1852400019", [NSString stringWithFormat:@"%@", [NSDate date]], @"20161211-1852400015", @"Lennar Corporation", @"Lot 81 Sanctuary", @"2016-12-30", @"Mitchell Smith", nil], nil];
+    valueRange.values = [NSArray arrayWithObjects:[NSArray arrayWithObjects:[NSString stringWithFormat:@"%d", arc4random_uniform(1000000000)], [NSString stringWithFormat:@"%@", [NSDate date]], [NSString stringWithFormat:@"%d-%d", arc4random_uniform(100000000), arc4random_uniform(100000000)], self.addClientsNameTextField.text, self.addJobLocationTextField.text, self.addInspectionDateTextField.text, self.addInspectorsNameTextField.text, nil], nil];
     GTLRSheetsQuery_SpreadsheetsValuesAppend *append = [GTLRSheetsQuery_SpreadsheetsValuesAppend queryWithObject:valueRange spreadsheetId:spreadsheetId range:@"Inspections!A2:G"];
     append.valueInputOption = kGTLRSheetsValueInputOptionUserEntered;
     append.insertDataOption = kGTLRSheetsInsertDataOptionInsertRows;
     [self.service executeQuery:append delegate:self didFinishSelector:@selector(displayWithTicket:finishedWithObject:error:)];
 }
+
+-(IBAction)openAddView:(id)sender {
+    if (!self.service.authorizer.canAuthorize) {
+        // Not yet authorized, request authorization by pushing the login UI onto the UI stack.
+        [self presentViewController:[self createAuthController] animated:YES completion:nil];
+    } else {
+        self.addInspectionView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+        self.addInspectionView.hidden = NO;
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            // animate it to the identity transform (100% scale)
+            self.addInspectionView.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished){
+            // if you want to do something once the animation finishes, put it here
+        }];
+    }
+}
+
+-(void)ShowSelectedDate
+{   NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    self.addInspectionDateTextField.text=[NSString stringWithFormat:@"%@",[formatter stringFromDate:datePicker.date]];
+    [self textFieldShouldReturn:_addInspectionDateTextField];
+}
+
 
 - (void)displayWithTicket:(GTLRServiceTicket *)ticket
               finishedWithObject:(GTLRSheets_ValueRange *)result

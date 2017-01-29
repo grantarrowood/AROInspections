@@ -10,13 +10,24 @@
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "GTLRSheets.h"
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
+#include <stdlib.h>
 
 @interface MainViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+{
+    UIDatePicker *datePicker;
+}
 - (IBAction)closePopoverAction:(id)sender;
 - (IBAction)closePanelAction:(id)sender;
 - (IBAction)closeSettingsViewAction:(id)sender;
 - (IBAction)saveSettingsAction:(id)sender;
+- (IBAction)closeAddView:(id)sender;
+- (IBAction)addInspectionAction:(id)sender;
 @property (nonatomic, strong) GTLRSheetsService *service;
+@property (weak, nonatomic) IBOutlet UIView *addInspectionView;
+@property (weak, nonatomic) IBOutlet UITextField *addClientsNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *addJobLocationTextField;
+@property (weak, nonatomic) IBOutlet UITextField *addInspectionDateTextField;
+@property (weak, nonatomic) IBOutlet UITextField *addInspectorsNameTextField;
 @property (strong, nonatomic) NSMutableArray *clients;
 @property (strong, nonatomic) NSMutableArray *inspections;
 @property (strong, nonatomic) NSMutableArray *months;
