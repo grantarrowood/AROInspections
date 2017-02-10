@@ -61,7 +61,12 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
                                                           clientID:kClientID
                                                       clientSecret:nil];
     self.service.APIKey = @"AIzaSyCivDyonDkOvbRz8xSrVDI-Kko3_lwcaxc";
-    [self getSections];
+    if (!self.service.authorizer.canAuthorize) {
+        // Not yet authorized, request authorization by pushing the login UI onto the UI stack.
+        [self presentViewController:[self createAuthController] animated:YES completion:nil];
+    } else {
+        [self getSections];
+    }
     
 }
 
@@ -685,6 +690,11 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     append.valueInputOption = kGTLRSheetsValueInputOptionUserEntered;
     append.insertDataOption = kGTLRSheetsInsertDataOptionInsertRows;
     [self.service executeQuery:append delegate:self didFinishSelector:@selector(displayWithTicket:finishedWithObject:error:)];
+    _clients = [[NSMutableArray alloc] init];
+    _months = [[NSMutableArray alloc] init];
+    _inspections = [[NSMutableArray alloc] init];
+    _panelInspections = [[NSMutableArray alloc] init];
+    [self getSections];
 }
 
 -(IBAction)openAddView:(id)sender {
@@ -692,6 +702,10 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
         // Not yet authorized, request authorization by pushing the login UI onto the UI stack.
         [self presentViewController:[self createAuthController] animated:YES completion:nil];
     } else {
+        self.addInspectionDateTextField.text = @"";
+        self.addInspectorsNameTextField.text = @"";
+        self.addJobLocationTextField.text = @"";
+        self.addClientsNameTextField.text = @"";
         if(_settingsView.hidden && _popOverView.hidden) {
             self.addInspectionView.transform = CGAffineTransformMakeScale(0.01, 0.01);
             self.addInspectionView.hidden = NO;

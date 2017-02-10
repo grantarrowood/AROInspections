@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+@import HockeySDK;
 
 @interface AppDelegate ()
 
@@ -17,6 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"833228551e43405b9832985c8f03f6c8"];
+    [[BITHockeyManager sharedHockeyManager] startManager]; [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
     [DropboxClientsManager setupWithAppKey:@"wntgrbueldo53jd"];
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
     {
