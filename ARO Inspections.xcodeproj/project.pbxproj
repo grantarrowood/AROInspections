@@ -50,7 +50,7 @@
 		3C2EF6960A31479AFBBFEE20 /* libPods-ARO InspectionsUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ARO InspectionsUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CB7FC71106A7A28F10B3E95 /* Pods-ARO Inspections.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARO Inspections.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARO Inspections/Pods-ARO Inspections.release.xcconfig"; sourceTree = "<group>"; };
 		7D3F022CE09124318FF8325C /* libPods-ARO Inspections.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ARO Inspections.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9C050A2A1DFF5C8E000D0726 /* ARO Inspections.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ARO Inspections.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C050A2A1DFF5C8E000D0726 /* Pike Inspections.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pike Inspections.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C050A2E1DFF5C8E000D0726 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9C050A301DFF5C8E000D0726 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9C050A311DFF5C8E000D0726 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 		9C050A2B1DFF5C8E000D0726 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9C050A2A1DFF5C8E000D0726 /* ARO Inspections.app */,
+				9C050A2A1DFF5C8E000D0726 /* Pike Inspections.app */,
 				9C050A431DFF5C8E000D0726 /* ARO InspectionsTests.xctest */,
 				9C050A4E1DFF5C8E000D0726 /* ARO InspectionsUITests.xctest */,
 			);
@@ -235,7 +235,7 @@
 			);
 			name = "ARO Inspections";
 			productName = "ARO Inspections";
-			productReference = 9C050A2A1DFF5C8E000D0726 /* ARO Inspections.app */;
+			productReference = 9C050A2A1DFF5C8E000D0726 /* Pike Inspections.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9C050A421DFF5C8E000D0726 /* ARO InspectionsTests */ = {
@@ -565,8 +565,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Randy Arrowood (N5WA24M8FS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Randy Arrowood (N5WA24M8FS)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -588,6 +588,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "Pike Inspections";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -614,8 +615,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Randy Arrowood (N5WA24M8FS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Randy Arrowood (N5WA24M8FS)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -630,6 +631,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "Pike Inspections";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -654,7 +656,7 @@
 				INFOPLIST_FILE = "ARO Inspections/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pigletproducts.PikeInspections;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Pike Inspections";
 			};
 			name = Debug;
 		};
@@ -676,7 +678,7 @@
 				INFOPLIST_FILE = "ARO Inspections/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pigletproducts.PikeInspections;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Pike Inspections";
 			};
 			name = Release;
 		};
