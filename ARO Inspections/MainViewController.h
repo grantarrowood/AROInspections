@@ -12,9 +12,10 @@
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 #include <stdlib.h>
 
-@interface MainViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface MainViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 {
     UIDatePicker *datePicker;
+    UIPickerView *namePicker;
 }
 - (IBAction)closePopoverAction:(id)sender;
 - (IBAction)closePanelAction:(id)sender;

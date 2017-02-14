@@ -38,15 +38,20 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     _settingsView.layer.cornerRadius = 5;
     _addInspectionView.layer.cornerRadius = 5;
     // Do any additional setup after loading the view.
+    namePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 200, 320, 200)];
+    namePicker.dataSource = self;
+    namePicker.delegate = self;
     datePicker = [[UIDatePicker alloc] init];
     datePicker.datePickerMode = UIDatePickerModeDate;
     [self.addInspectionDateTextField setInputView:datePicker];
+    [self.addClientsNameTextField setInputView:namePicker];
     UIToolbar *toolBar=[[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
     [toolBar setTintColor:[UIColor grayColor]];
     UIBarButtonItem *doneBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(ShowSelectedDate)];
     UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     [toolBar setItems:[NSArray arrayWithObjects:space,doneBtn, nil]];
     [self.addInspectionDateTextField setInputAccessoryView:toolBar];
+    [self.addClientsNameTextField setInputAccessoryView:toolBar];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -160,9 +165,12 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
         NSArray *rows = result.values;
         if (rows.count > 0) {
             for (NSArray *row in rows) {
-                [_clients addObject:@{@"Name": row[0],@"Visits": row[3]}];
+                if(row.count < 4) {
+                    
+                } else {
+                    [_clients addObject:@{@"Name": row[0],@"Visits": row[3]}];
+                }
             }
-            
             NSLog(@"Hello World");
         } else {
         }
@@ -456,6 +464,27 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     }
 }
 
+
+
+
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+// The number of rows of data
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return _clients.count;
+}
+
+// The data to return for the row and component (column) that's being passed in
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [[_clients objectAtIndex:row] valueForKey:@"Name"];
+}
+
 /*
  // Override to support conditional editing of the table view.
  - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -741,10 +770,19 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
 }
 
 -(void)ShowSelectedDate
-{   NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    self.addInspectionDateTextField.text=[NSString stringWithFormat:@"%@",[formatter stringFromDate:datePicker.date]];
-    [self textFieldShouldReturn:_addInspectionDateTextField];
+{
+    if ([self.addClientsNameTextField isEditing]) {
+        
+        self.addClientsNameTextField.text=[NSString stringWithFormat:@"%@",[[_clients objectAtIndex:[namePicker selectedRowInComponent:0]] valueForKey:@"Name"]];
+        [self textFieldShouldReturn:_addClientsNameTextField];
+    }
+    if ([self.addInspectionDateTextField isEditing]) {
+        NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        self.addInspectionDateTextField.text=[NSString stringWithFormat:@"%@",[formatter stringFromDate:datePicker.date]];
+        [self textFieldShouldReturn:_addInspectionDateTextField];
+    }
+
 }
 
 
