@@ -52,6 +52,10 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     [toolBar setItems:[NSArray arrayWithObjects:space,doneBtn, nil]];
     [self.addInspectionDateTextField setInputAccessoryView:toolBar];
     [self.addClientsNameTextField setInputAccessoryView:toolBar];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [self.mainTableView addSubview:self.refreshControl];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -171,7 +175,6 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
                     [_clients addObject:@{@"Name": row[0],@"Visits": row[3]}];
                 }
             }
-            NSLog(@"Hello World");
         } else {
         }
     } else {
@@ -283,6 +286,21 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     
 }
 
+- (void)refresh:(id)sender{
+    
+    // -- DO SOMETHING AWESOME (... or just wait 3 seconds) --
+    // This is where you'll make requests to an API, reload data, or process information
+    [_mainTableView reloadData];
+    double delayInSeconds = 3.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        // When done requesting/reloading/processing invoke endRefreshing, to close the control
+        [self.refreshControl endRefreshing];
+    });
+    // -- FINISHED SOMETHING AWESOME, WOO! --
+}
+
+
 
 -(int)getVisits:(NSString *)clientName inSection:(NSInteger)sectionNumber{
     NSString *sectionDate = _months[sectionNumber];
@@ -367,6 +385,14 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     
     
     if (tableView == self.panelTableView) {
+        _popoverCloseView.hidden = NO;
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            // animate it to the identity transform (100% scale)
+            _popoverCloseView.backgroundColor = [UIColor grayColor];
+            _popoverCloseView.alpha = .4;
+        } completion:^(BOOL finished){
+            // if you want to do something once the animation finishes, put it here
+        }];
         DropboxClient *client = [DropboxClientsManager authorizedClient];
         NSString *searchPath = @"/Apps/ProntoForms/ClientSafetyInspectionsProntoForms";
         [[client.filesRoutes listFolder:searchPath]
@@ -444,18 +470,26 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
                       [_dropboxWebView loadRequest:request];
                       _popOverView.transform = CGAffineTransformMakeScale(0.01, 0.01);
                       _popOverView.hidden = NO;
-                      _popoverCloseView.hidden = NO;
+                   //   _popoverCloseView.hidden = NO;
                       [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                           // animate it to the identity transform (100% scale)
                           _popOverView.transform = CGAffineTransformIdentity;
-                          _popoverCloseView.backgroundColor = [UIColor grayColor];
-                          _popoverCloseView.alpha = .4;
+//                          _popoverCloseView.backgroundColor = [UIColor grayColor];
+//                          _popoverCloseView.alpha = .4;
                       } completion:^(BOOL finished){
                           // if you want to do something once the animation finishes, put it here
                       }];
 
                   } else {
                       NSLog(@"%@\n%@\n", routeError, error);
+                      [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                          // animate it to the identity transform (100% scale)
+                          _popoverCloseView.backgroundColor = [UIColor clearColor];
+                          _popoverCloseView.alpha = 1;
+                      } completion:^(BOOL finished){
+                          // if you want to do something once the animation finishes, put it here
+                          _popoverCloseView.hidden = YES;
+                      }];
                   }
               }] progress:^(int64_t bytesDownloaded, int64_t totalBytesDownloaded, int64_t totalBytesExpectedToDownload) {
                   NSLog(@"%lld\n%lld\n%lld\n", bytesDownloaded, totalBytesDownloaded, totalBytesExpectedToDownload);
@@ -719,11 +753,16 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     append.valueInputOption = kGTLRSheetsValueInputOptionUserEntered;
     append.insertDataOption = kGTLRSheetsInsertDataOptionInsertRows;
     [self.service executeQuery:append delegate:self didFinishSelector:@selector(displayWithTicket:finishedWithObject:error:)];
-    _clients = [[NSMutableArray alloc] init];
-    _months = [[NSMutableArray alloc] init];
-    _inspections = [[NSMutableArray alloc] init];
-    _panelInspections = [[NSMutableArray alloc] init];
-    [self getSections];
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        _clients = [[NSMutableArray alloc] init];
+        _months = [[NSMutableArray alloc] init];
+        _inspections = [[NSMutableArray alloc] init];
+        _panelInspections = [[NSMutableArray alloc] init];
+        [self getSections];
+    });
+
 }
 
 -(IBAction)openAddView:(id)sender {

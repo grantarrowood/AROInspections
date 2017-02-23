@@ -26,7 +26,7 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setValue:[NSString stringWithFormat:@"1cBWAKZxTMT934OanqsHkhsWMIEuWarHPdb_StalVz6s"] forKey:@"SpreadsheetID"];
+        [defaults setValue:[NSString stringWithFormat:@"1le-KXzCnfh47SYkL97EN9fvAe5dZnjNwssu-p4YcMHo"] forKey:@"SpreadsheetID"];
         [defaults synchronize];
     }
     return YES;

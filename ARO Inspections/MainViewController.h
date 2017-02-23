@@ -29,6 +29,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *addJobLocationTextField;
 @property (weak, nonatomic) IBOutlet UITextField *addInspectionDateTextField;
 @property (weak, nonatomic) IBOutlet UITextField *addInspectorsNameTextField;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) UIView *refreshLoadingView;
+
 @property (strong, nonatomic) NSMutableArray *clients;
 @property (strong, nonatomic) NSMutableArray *inspections;
 @property (strong, nonatomic) NSMutableArray *months;
