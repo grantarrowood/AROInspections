@@ -21,6 +21,7 @@
 		9C0D30A21E287263003AC7DF /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C0D30A11E287263003AC7DF /* MainViewController.m */; };
 		9C0D30A51E28734D003AC7DF /* MainPanelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C0D30A41E28734D003AC7DF /* MainPanelTableViewCell.m */; };
 		9C0D30A71E2A7E2D003AC7DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C0D30A61E2A7E2D003AC7DF /* Assets.xcassets */; };
+		9C5DCCCA1ED74B7400FA93E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C5DCCC91ED74B7400FA93E6 /* GoogleService-Info.plist */; };
 		9CAD3DAC1E3D209B008CCE5F /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAD3DAB1E3D209B008CCE5F /* TestViewController.m */; };
 		9CAD3DC71E3D838E008CCE5F /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CAD3DC51E3D838E008CCE5F /* HockeySDK.framework */; };
 		9CAD3DC81E3D838E008CCE5F /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9CAD3DC61E3D838E008CCE5F /* HockeySDKResources.bundle */; };
@@ -72,6 +73,7 @@
 		9C0D30A31E28734D003AC7DF /* MainPanelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPanelTableViewCell.h; sourceTree = "<group>"; };
 		9C0D30A41E28734D003AC7DF /* MainPanelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPanelTableViewCell.m; sourceTree = "<group>"; };
 		9C0D30A61E2A7E2D003AC7DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9C5DCCC91ED74B7400FA93E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9CAD3DAA1E3D209B008CCE5F /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		9CAD3DAB1E3D209B008CCE5F /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		9CAD3DC51E3D838E008CCE5F /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				9C0D30A61E2A7E2D003AC7DF /* Assets.xcassets */,
 				9C050A3B1DFF5C8E000D0726 /* LaunchScreen.storyboard */,
 				9C050A3E1DFF5C8E000D0726 /* Info.plist */,
+				9C5DCCC91ED74B7400FA93E6 /* GoogleService-Info.plist */,
 				9C050A2D1DFF5C8E000D0726 /* Supporting Files */,
 				9CAD3DAA1E3D209B008CCE5F /* TestViewController.h */,
 				9CAD3DAB1E3D209B008CCE5F /* TestViewController.m */,
@@ -285,7 +288,7 @@
 		9C050A221DFF5C8E000D0726 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Piglet Products";
 				TargetAttributes = {
 					9C050A291DFF5C8E000D0726 = {
@@ -332,6 +335,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C5DCCCA1ED74B7400FA93E6 /* GoogleService-Info.plist in Resources */,
 				9C050A3D1DFF5C8E000D0726 /* LaunchScreen.storyboard in Resources */,
 				9CAD3DC81E3D838E008CCE5F /* HockeySDKResources.bundle in Resources */,
 				9C0D30A71E2A7E2D003AC7DF /* Assets.xcassets in Resources */,
@@ -562,6 +566,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -612,6 +617,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

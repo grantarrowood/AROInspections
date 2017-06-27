@@ -11,12 +11,15 @@
 #import "GTLRSheets.h"
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 #include <stdlib.h>
+#import <Google/SignIn.h>
 
-@interface MainViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
+@interface MainViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, GIDSignInDelegate, GIDSignInUIDelegate>
 {
     UIDatePicker *datePicker;
     UIPickerView *namePicker;
 }
+@property (nonatomic) BOOL authSuccessful;
+@property (nonatomic, strong) IBOutlet GIDSignInButton *signInButton;
 - (IBAction)closePopoverAction:(id)sender;
 - (IBAction)closePanelAction:(id)sender;
 - (IBAction)closeSettingsViewAction:(id)sender;

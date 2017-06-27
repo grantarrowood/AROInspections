@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MainViewController.h"
 @import HockeySDK;
 
 @interface AppDelegate ()
@@ -20,7 +21,7 @@
     // Override point for customization after application launch.
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"833228551e43405b9832985c8f03f6c8"];
     [[BITHockeyManager sharedHockeyManager] startManager]; [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
-    [DropboxClientsManager setupWithAppKey:@"wntgrbueldo53jd"];
+    [DBClientsManager setupWithAppKey:@"wntgrbueldo53jd"];
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
     {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
@@ -29,6 +30,9 @@
         [defaults setValue:[NSString stringWithFormat:@"1le-KXzCnfh47SYkL97EN9fvAe5dZnjNwssu-p4YcMHo"] forKey:@"SpreadsheetID"];
         [defaults synchronize];
     }
+    NSError* configureError;
+    [[GGLContext sharedInstance] configureWithError: &configureError];
+    NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
     return YES;
 }
 
@@ -59,18 +63,26 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    DBOAuthResult *authResult = [DropboxClientsManager handleRedirectURL:url];
-    if (authResult != nil) {
-        if ([authResult isSuccess]) {
-            NSLog(@"Success! User is logged into Dropbox.");
-        } else if ([authResult isCancel]) {
-            NSLog(@"Authorization flow was manually canceled by user!");
-        } else if ([authResult isError]) {
-            NSLog(@"Error: %@", authResult);
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
+            sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    if ([[url scheme] isEqual:@"com.googleusercontent.apps.305412303204-e4ac96jc1eofpniu5jhqoplcqdupqslk"]) {
+        return [[GIDSignIn sharedInstance] handleURL:url
+                                   sourceApplication:sourceApplication
+                                          annotation:annotation];
+    } else {
+        DBOAuthResult *authResult = [DBClientsManager handleRedirectURL:url];
+        if (authResult != nil) {
+            if ([authResult isSuccess]) {
+                NSLog(@"Success! User is logged into Dropbox.");
+            } else if ([authResult isCancel]) {
+                NSLog(@"Authorization flow was manually canceled by user!");
+            } else if ([authResult isError]) {
+                NSLog(@"Error: %@", authResult);
+            }
         }
+        return NO;
     }
-    return NO;
 }
 
 

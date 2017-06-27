@@ -5,6 +5,7 @@ target 'ARO Inspections’ do
     pod 'GoogleAPIClientForREST/Sheets', '~> 1.0.3'
     pod 'GTMOAuth2', '~> 1.1.2'
     pod 'ObjectiveDropboxOfficial'
+    pod 'Google/SignIn'
   target 'ARO InspectionsTests’ do
     inherit! :search_paths
     # Pods for testing

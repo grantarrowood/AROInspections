@@ -26,12 +26,21 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [DropboxClientsManager authorizeFromController:[UIApplication sharedApplication]
-                                        controller:self
-                                           openURL:^(NSURL *url){
-                                               [[UIApplication sharedApplication] openURL:url];
-                                           }
-                                       browserAuth:YES];
+    // Configure Google Sign-in.
+    GIDSignIn* signIn = [GIDSignIn sharedInstance];
+    signIn.delegate = self;
+    signIn.uiDelegate = self;
+    signIn.scopes = [NSArray arrayWithObjects:kGTLRAuthScopeSheetsSpreadsheets, nil];
+    // Add the sign-in button.
+    self.signInButton = [[GIDSignInButton alloc] init];
+    [self.view addSubview:self.signInButton];
+    // Initialize the service object.
+    self.service = [[GTLRSheetsService alloc] init];
+    [DBClientsManager authorizeFromController:[UIApplication sharedApplication]
+                                   controller:self
+                                      openURL:^(NSURL *url) {
+                                          [[UIApplication sharedApplication] openURL:url];
+                                      }];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PikeLogo"]];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings-icon"] style:UIBarButtonItemStylePlain target:self action:@selector(openSettingsView:)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(openAddView:)];
@@ -64,21 +73,20 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     _months = [[NSMutableArray alloc] init];
     _inspections = [[NSMutableArray alloc] init];
     _panelInspections = [[NSMutableArray alloc] init];
-    self.service = [[GTLRSheetsService alloc] init];
-    self.service.authorizer =
-    [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
-                                                          clientID:kClientID
-                                                      clientSecret:nil];
-    self.service.APIKey = @"AIzaSyCivDyonDkOvbRz8xSrVDI-Kko3_lwcaxc";
-    if (!self.service.authorizer.canAuthorize) {
-        // Not yet authorized, request authorization by pushing the login UI onto the UI stack.
-        [self presentViewController:[self createAuthController] animated:YES completion:nil];
-    } else {
-        [self getSections];
-    }
     
 }
-
+- (void)signIn:(GIDSignIn *)signIn
+didSignInForUser:(GIDGoogleUser *)user
+     withError:(NSError *)error {
+    if (error != nil) {
+        [self showAlert:@"Authentication Error" message:error.localizedDescription];
+        self.service.authorizer = nil;
+    } else {
+        self.signInButton.hidden = true;
+        self.service.authorizer = user.authentication.fetcherAuthorizer;
+        [self getSections];
+    }
+}
 
 - (void)getSections {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -109,6 +117,7 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
              finishedWithObject:(GTLRSheets_ValueRange *)result
                           error:(NSError *)error {
     if (error == nil) {
+        NSLog(@"WORKING!!!!!!!!!!!");
         NSArray *rows = result.values;
         if (rows.count > 0) {
             NSMutableArray *reveredMonths = [[NSMutableArray alloc] init];
@@ -154,6 +163,7 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
             [_mainTableView reloadData];
         } else {
         }
+        NSLog(@"%lu", (unsigned long)_inspections.count);
     } else {
         NSMutableString *message = [[NSMutableString alloc] init];
         [message appendFormat:@"Error getting sheet data: %@\n", error.localizedDescription];
@@ -177,40 +187,11 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
             }
         } else {
         }
+        NSLog(@"%lu", (unsigned long)_clients.count);
     } else {
         NSMutableString *message = [[NSMutableString alloc] init];
         [message appendFormat:@"Error getting sheet data: %@\n", error.localizedDescription];
         [self showAlert:@"Error" message:message];
-    }
-}
-
-
-
-- (GTMOAuth2ViewControllerTouch *)createAuthController {
-    GTMOAuth2ViewControllerTouch *authController;
-    // If modifying these scopes, delete your previously saved credentials by
-    // resetting the iOS simulator or uninstall the app.
-    NSArray *scopes = [NSArray arrayWithObjects:kGTLRAuthScopeSheetsSpreadsheets, nil];
-    authController = [[GTMOAuth2ViewControllerTouch alloc]
-                      initWithScope:[scopes componentsJoinedByString:@" "]
-                      clientID:kClientID
-                      clientSecret:nil
-                      keychainItemName:kKeychainItemName
-                      delegate:self
-                      finishedSelector:@selector(viewController:finishedWithAuth:error:)];
-    return authController;
-}
-
-- (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
-      finishedWithAuth:(GTMOAuth2Authentication *)authResult
-                 error:(NSError *)error {
-    if (error != nil) {
-        [self showAlert:@"Authentication Error" message:error.localizedDescription];
-        self.service.authorizer = nil;
-    }
-    else {
-        self.service.authorizer = authResult;
-        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
@@ -267,6 +248,7 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
         MainTableViewCell *cell = [self.mainTableView dequeueReusableCellWithIdentifier:@"mainCell" forIndexPath:indexPath];
         cell.clientNameLabel.text = [[_clients objectAtIndex:indexPath.row] valueForKey:@"Name"];
         cell.remainingVisitsLabel.text = [NSString stringWithFormat:@"%d out of %@", [self getVisits:[[_clients objectAtIndex:indexPath.row] valueForKey:@"Name"] inSection:indexPath.section], [[_clients objectAtIndex:indexPath.row] valueForKey:@"Visits"]];
+        NSLog(@"%ld", (long)indexPath.row);
         return cell;
     }
     if (tableView == self.panelTableView) {
@@ -276,10 +258,6 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
         cell.inspectorsNameLabel.text = [[_panelInspections objectAtIndex:indexPath.row] valueForKey:@"InspectorName"];
         return cell;
     }
-    
-    
-    
-    
     return UITableViewCellStyleDefault;
 
     
@@ -290,6 +268,11 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     
     // -- DO SOMETHING AWESOME (... or just wait 3 seconds) --
     // This is where you'll make requests to an API, reload data, or process information
+    _clients = [[NSMutableArray alloc] init];
+    _months = [[NSMutableArray alloc] init];
+    _inspections = [[NSMutableArray alloc] init];
+    _panelInspections = [[NSMutableArray alloc] init];
+    [self getSections];
     [_mainTableView reloadData];
     double delayInSeconds = 3.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -393,10 +376,10 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
         } completion:^(BOOL finished){
             // if you want to do something once the animation finishes, put it here
         }];
-        DropboxClient *client = [DropboxClientsManager authorizedClient];
+        DBUserClient *client = [DBClientsManager authorizedClient];
         NSString *searchPath = @"/Apps/ProntoForms/ClientSafetyInspectionsProntoForms";
         [[client.filesRoutes listFolder:searchPath]
-         response:^(DBFILESListFolderResult *result, DBFILESListFolderError *routeError, DBError *error) {
+         setResponseBlock:^(DBFILESListFolderResult *result, DBFILESListFolderError *routeError, DBRequestError *error) {
              if (result) {
                  [self displayPhotos:result.entries atIndex:indexPath.row];
              } else {
@@ -459,9 +442,9 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
             NSFileManager *fileManager = [NSFileManager defaultManager];
             NSURL *outputDirectory = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask][0];
             NSURL *outputUrl = [outputDirectory URLByAppendingPathComponent:entry.name];
-            DropboxClient *client = [DropboxClientsManager authorizedClient];
+            DBUserClient *client = [DBClientsManager authorizedClient];
             [[[client.filesRoutes downloadUrl:entry.pathDisplay overwrite:YES destination:outputUrl]
-              response:^(DBFILESFileMetadata *result, DBFILESDownloadError *routeError, DBError *error, NSURL *destination) {
+              setResponseBlock:^(DBFILESFileMetadata *result, DBFILESDownloadError *routeError, DBRequestError *error, NSURL *destination) {
                   if (result) {
                       //              NSLog(@"%@\n", result);
                       //              NSData *data = [[NSFileManager defaultManager] contentsAtPath:[destination path]];
@@ -491,9 +474,10 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
                           _popoverCloseView.hidden = YES;
                       }];
                   }
-              }] progress:^(int64_t bytesDownloaded, int64_t totalBytesDownloaded, int64_t totalBytesExpectedToDownload) {
+              }] setProgressBlock:^(int64_t bytesDownloaded, int64_t totalBytesDownloaded, int64_t totalBytesExpectedToDownload) {
                   NSLog(@"%lld\n%lld\n%lld\n", bytesDownloaded, totalBytesDownloaded, totalBytesExpectedToDownload);
               }];
+            
         }
     }
 }
@@ -746,10 +730,11 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
     NSString *spreadsheetId = [defaults valueForKey:@"SpreadsheetID"];
     
     GTLRSheets_ValueRange *valueRange = [[GTLRSheets_ValueRange alloc] init];
-    //valueRange.range = @"Class Data!A2:G";
     valueRange.majorDimension = kGTLRSheetsMajorDimensionRows;
     valueRange.values = [NSArray arrayWithObjects:[NSArray arrayWithObjects:[NSString stringWithFormat:@"%d", arc4random_uniform(1000000000)], [NSString stringWithFormat:@"%@", [NSDate date]], [NSString stringWithFormat:@"%d-%d", arc4random_uniform(100000000), arc4random_uniform(100000000)], self.addClientsNameTextField.text, self.addJobLocationTextField.text, self.addInspectionDateTextField.text, self.addInspectorsNameTextField.text, nil], nil];
+    
     GTLRSheetsQuery_SpreadsheetsValuesAppend *append = [GTLRSheetsQuery_SpreadsheetsValuesAppend queryWithObject:valueRange spreadsheetId:spreadsheetId range:@"Inspections!A2:G"];
+    
     append.valueInputOption = kGTLRSheetsValueInputOptionUserEntered;
     append.insertDataOption = kGTLRSheetsInsertDataOptionInsertRows;
     [self.service executeQuery:append delegate:self didFinishSelector:@selector(displayWithTicket:finishedWithObject:error:)];
@@ -766,45 +751,39 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
 }
 
 -(IBAction)openAddView:(id)sender {
-    if (!self.service.authorizer.canAuthorize) {
-        // Not yet authorized, request authorization by pushing the login UI onto the UI stack.
-        [self presentViewController:[self createAuthController] animated:YES completion:nil];
+    self.addInspectionDateTextField.text = @"";
+    self.addInspectorsNameTextField.text = @"";
+    self.addJobLocationTextField.text = @"";
+    self.addClientsNameTextField.text = @"";
+    if(_settingsView.hidden && _popOverView.hidden) {
+        self.addInspectionView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+        self.addInspectionView.hidden = NO;
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            // animate it to the identity transform (100% scale)
+            self.addInspectionView.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished){
+            // if you want to do something once the animation finishes, put it here
+        }];
+    } else if (_settingsView.hidden && !_popOverView.hidden) {
+        [self closePopoverAction:self];
+        self.addInspectionView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+        self.addInspectionView.hidden = NO;
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            // animate it to the identity transform (100% scale)
+            self.addInspectionView.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished){
+            // if you want to do something once the animation finishes, put it here
+        }];
     } else {
-        self.addInspectionDateTextField.text = @"";
-        self.addInspectorsNameTextField.text = @"";
-        self.addJobLocationTextField.text = @"";
-        self.addClientsNameTextField.text = @"";
-        if(_settingsView.hidden && _popOverView.hidden) {
-            self.addInspectionView.transform = CGAffineTransformMakeScale(0.01, 0.01);
-            self.addInspectionView.hidden = NO;
-            [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                // animate it to the identity transform (100% scale)
-                self.addInspectionView.transform = CGAffineTransformIdentity;
-            } completion:^(BOOL finished){
-                // if you want to do something once the animation finishes, put it here
-            }];
-        } else if (_settingsView.hidden && !_popOverView.hidden) {
-            [self closePopoverAction:self];
-            self.addInspectionView.transform = CGAffineTransformMakeScale(0.01, 0.01);
-            self.addInspectionView.hidden = NO;
-            [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                // animate it to the identity transform (100% scale)
-                self.addInspectionView.transform = CGAffineTransformIdentity;
-            } completion:^(BOOL finished){
-                // if you want to do something once the animation finishes, put it here
-            }];
-        } else {
-            [self closeSettingsViewAction:self];
-            self.addInspectionView.transform = CGAffineTransformMakeScale(0.01, 0.01);
-            self.addInspectionView.hidden = NO;
-            [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                // animate it to the identity transform (100% scale)
-                self.addInspectionView.transform = CGAffineTransformIdentity;
-            } completion:^(BOOL finished){
-                // if you want to do something once the animation finishes, put it here
-            }];
-        }
-
+        [self closeSettingsViewAction:self];
+        self.addInspectionView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+        self.addInspectionView.hidden = NO;
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            // animate it to the identity transform (100% scale)
+            self.addInspectionView.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished){
+            // if you want to do something once the animation finishes, put it here
+        }];
     }
 }
 
@@ -829,7 +808,7 @@ static NSString *const kClientID = @"305412303204-e4ac96jc1eofpniu5jhqoplcqdupqs
               finishedWithObject:(GTLRSheets_ValueRange *)result
                            error:(NSError *)error {
     
-
+    //NSLog(@"%@", error);
 }
 
 @end

@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>GoogleToolboxForMac.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>ObjectiveDropboxOfficial.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,6 +47,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0CE2C5FFABAA8D2B4DF63119BB10DB40</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2D8CCDAF9755E2CE87236FC6D71901A6</key>
 		<dict>
 			<key>primary</key>
@@ -52,17 +62,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>409482D7023A3C8E0DE14416BD0F4702</key>
+		<key>4E16246EF7ACFDF307252F94ABF41F1C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7767FEDE752275CA21AB5FBFC5FDC38B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>C848428A6401B62792C564ACD2380497</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D1035F868929B04DD0A96D8E1B65EB8E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
